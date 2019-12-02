@@ -60,7 +60,7 @@ function txt_sub_backup() {
   local prefs=~/Library/Preferences/.GlobalPreferences.plist
   local backup=$DOTFILES/conf/osx/NSUserReplacementItems.plist
   /usr/libexec/PlistBuddy -x -c "Print NSUserReplacementItems" "$prefs" > "$backup" &&
-  echo "File ~${backup#$HOME} written."
+  echo "Le fichier ~${backup#$HOME} écrire."
 }
 
 # Import Localization.prefPane text substitution rules.
@@ -68,7 +68,7 @@ function txt_sub_restore() {
   local prefs=~/Library/Preferences/.GlobalPreferences.plist
   local backup=$DOTFILES/conf/osx/NSUserReplacementItems.plist
   if [[ ! -e "$backup" ]]; then
-    echo "Error: file ~${backup#$HOME} does not exist!"
+    echo "Erreur: le fichier  ~${backup#$HOME} n'existe pas!"
     return 1
   fi
   cmds=(

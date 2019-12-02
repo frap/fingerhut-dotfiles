@@ -288,7 +288,7 @@ if [[ ! "$(type -P git)" ]]; then
   exit 1
 fi
 
-# Initialize.
+# Initialise.
 if [[ ! -d $DOTFILES ]]; then
   # $DOTFILES directory doesn't exist? Clone it!
   new_dotfiles_install=1

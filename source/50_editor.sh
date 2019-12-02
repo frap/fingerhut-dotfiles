@@ -15,11 +15,6 @@ then
     # still version 21.x originally released in 2007, even on the
     # latest Mac OS Sierra!
     export EMACS="/opt/local/bin/emacs"
-elif [ -x "/router/bin/emacs-24.5" ]
-then
-    # Among machines I commonly use, /router/bin/emacs-24.5 only
-    # exists on Cisco Enterprise Linux machines.
-    export EMACS="/router/bin/emacs-24.5"
 else
     export EMACS="emacs"
 fi

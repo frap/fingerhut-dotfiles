@@ -192,7 +192,7 @@
        (map symbol)
        (group-by (fn [sym] (str/ends-with? (str sym) "'")))))
 
-(println "Skipping these symbols because they end with ' character and cause problems for early version of Clojure like 1.0.0 and 1.1.0:\n"
+(println "Sauter ces symboles parce qu'ils se terminent avec le caractère ' et causent des problèmes pour la première version de Clojure comme 1.0.0 et 1.1.0:\n"
          (get symbol-map true))
 (flush)
 
