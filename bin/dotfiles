@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 [[ "$1" == "source" ]] || \
 
-echo 'Dotfiles - "Cowboy" Ben Alman - http://benalman.com/'
+echo 'Dotfiles - "Gas" Andrés Gasson - http://frap.io/'
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 
@@ -21,7 +21,7 @@ exit; fi
 ###########################################
 
 # Where the magic happens.
-export DOTFILES=~/.dotfiles
+export DOTFILES=~/.local/.dotfiles
 
 # Logging stuff.
 function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
@@ -78,12 +78,12 @@ function prompt_menu() {
   exitcode=0
   if [[ "$2" ]]; then
     _prompt_menu_draws "$1"
-    read -t $2 -n 1 -sp "To edit this list, press any key within $2 seconds. "
+    read -t $2 -n 1 -sp "Pour éditer cette liste, appuyez sur n'importe quelle touche dans les $2 secondes. "
     exitcode=$?
     echo ""
   fi 1>&2
   if [[ "$exitcode" == 0 ]]; then
-    prompt="Toggle options (Separate options with spaces, ENTER when done): "
+    prompt="Options de bascule (séparer les options avec des espaces, ENTRER quand fait): "
     while _prompt_menu_draws "$1" 1 && read -rp "$prompt" nums && [[ "$nums" ]]; do
       _prompt_menu_adds $nums
     done
@@ -169,7 +169,7 @@ function setdiff() {
 # INTERNAL DOTFILES "INIT" VARS / FUNCTIONS
 ###########################################
 
-# Initialize.
+# Initialise.
 init_file=$DOTFILES/caches/init/selected
 function init_files() {
   local i f dirname oses os opt remove
@@ -191,7 +191,7 @@ function init_files() {
       [[ "$remove" ]] || menu_selects=("${menu_selects[@]}" "$opt")
     done
   fi
-  prompt_menu "Run the following init scripts?" $prompt_delay
+  prompt_menu "Exécuter les scripts d'initialisation?" $prompt_delay
   # Write out cache file for future reading.
   rm "$init_file" 2>/dev/null
   for i in "${!menu_selects[@]}"; do
@@ -205,23 +205,23 @@ function init_do() {
 }
 
 # Copy files.
-function copy_header() { e_header "Copying files into home directory"; }
+function copy_header() { e_header "Copier des fichiers dans le répertoire d'accueil"; }
 function copy_test() {
   if [[ -e "$2" && ! "$(cmp "$1" "$2" 2> /dev/null)" ]]; then
-    echo "same file"
+    echo "même fichier"
   elif [[ "$1" -ot "$2" ]]; then
-    echo "destination file newer"
+    echo "nouveau fichier de destination"
   fi
 }
 function copy_do() {
-  e_success "Copying ~/$1."
+  e_success "Copie ~/$1."
   cp "$2" ~/
 }
 
 # Link files.
-function link_header() { e_header "Linking files into home directory"; }
+function link_header() { e_header "Relier des fichiers dans le répertoire d'accueil"; }
 function link_test() {
-  [[ "$1" -ef "$2" ]] && echo "same file"
+  [[ "$1" -ef "$2" ]] && echo "même fichier"
 }
 function link_do() {
   e_success "Linking ~/$1."
@@ -246,12 +246,12 @@ function do_stuff() {
       # If _test function returns a string, skip file and print that message.
       skip="$("$1_test" "$file" "$dest")"
       if [[ "$skip" ]]; then
-        e_error "Skipping ~/$base, $skip."
+        e_error "Sauter ~/$base, $skip."
         continue
       fi
       # Destination file already exists in ~/. Back it up!
       if [[ -e "$dest" ]]; then
-        e_arrow "Backing up ~/$base."
+        e_arrow "La sauvegarde de ~/$base."
         # Set backup flag, so a nice message can be shown at the end.
         backup=1
         # Create backup dir if it doesn't already exist.
@@ -278,13 +278,13 @@ fi
 # If Git is not installed, install it (Ubuntu only, since Git comes standard
 # with recent XCode or CLT)
 if [[ ! "$(type -P git)" ]] && is_ubuntu; then
-  e_header "Installing Git"
+  e_header "Installer de Git"
   sudo apt-get -qq install git-core
 fi
 
 # If Git isn't installed by now, something exploded. We gots to quit!
 if [[ ! "$(type -P git)" ]]; then
-  e_error "Git should be installed. It isn't. Aborting."
+  e_error "Git doit être installé. Il n'est pas. L'abandon."
   exit 1
 fi
 
@@ -293,18 +293,18 @@ if [[ ! -d $DOTFILES ]]; then
   # $DOTFILES directory doesn't exist? Clone it!
   new_dotfiles_install=1
   prompt_delay=10
-  e_header "Downloading dotfiles"
-  git clone --recursive git://github.com/${github_user:-cowboy}/dotfiles.git $DOTFILES
+  e_header "Le téléchargement de dotfiles"
+  git clone --recursive git://github.com/${github_user:-frap}/fingerhut-dotfiles.git $DOTFILES
   cd $DOTFILES
 elif [[ "$1" != "restart" ]]; then
   # Make sure we have the latest files.
-  e_header "Updating dotfiles"
+  e_header "Mise à jour de  dotfiles"
   cd $DOTFILES
   prev_head="$(git rev-parse HEAD)"
   git pull
   git submodule update --init --recursive --quiet
   if [[ "$(git rev-parse HEAD)" != "$prev_head" ]]; then
-    e_header "Changes detected, restarting script"
+    e_header "Modifications détectées, redémarrage du script"
     exec "$0" "restart"
   fi
 fi
@@ -331,8 +331,8 @@ do_stuff "init"
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
-  echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
+  echo -e "\nLes sauvegardes ont été déplacées vers ~/${backup_dir#$HOME/}"
 fi
 
 # All done!
-e_header "All done!"
+e_header "Tout est fait!"
