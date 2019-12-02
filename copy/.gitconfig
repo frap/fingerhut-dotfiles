@@ -1,8 +1,7 @@
 [user]
-  name = Andy Fingerhut
-  email = andy_fingerhut@alum.wustl.edu
-  #email = andy.fingerhut@gmail.com
-  #email = jafinger@cisco.com
+  name = Andrés Gasson
+  email = gas@red-elvis.net
+  #email = agasson@red-elvis.net
 
 # Comment out lines from Ben Alman's dotfiles version of .gitconfig
 # file, until I learn what they do and whether I want them.
