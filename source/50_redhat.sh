@@ -1,11 +1,11 @@
-# Ubuntu-only stuff. Abort if not Ubuntu.
-is_ubuntu || return 1
+# RedHat-only stuff. Abort if not a Red Hat distribution.
+is_redhat || return 1
 
 # Package management
-alias update="sudo apt-get -qq update && sudo apt-get upgrade"
-alias install="sudo apt-get install"
-alias remove="sudo apt-get remove"
-alias search="apt-cache search"
+alias update="sudo yum update"
+alias install="sudo yum install"
+alias remove="sudo yum remove"
+alias search="sudo rpm -qa | rg "
 
 alias say=spd-say
 

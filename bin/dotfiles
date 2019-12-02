@@ -21,7 +21,7 @@ exit; fi
 ###########################################
 
 # Where the magic happens.
-export DOTFILES=~/.local/.dotfiles
+export DOTFILES=~/.local/dotfiles
 
 # Logging stuff.
 function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
@@ -45,8 +45,11 @@ function is_osx() {
 function is_ubuntu() {
   [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1
 }
+function is_redhat() {
+  [[ "$(cat /etc/redhat-release 2> /dev/null)" =~ "Red Hat" ]] || return 1
+}
 function get_os() {
-  for os in osx ubuntu; do
+  for os in osx ubuntu redhat; do
     is_$os; [[ $? == ${1:-0} ]] && echo $os
   done
 }

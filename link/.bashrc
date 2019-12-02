@@ -1,5 +1,5 @@
 # Where the magic happens.
-export DOTFILES=~/.local/.dotfiles
+export DOTFILES=~/.local/dotfiles
 
 # Add binaries into the path
 PATH=$DOTFILES/bin:$PATH
