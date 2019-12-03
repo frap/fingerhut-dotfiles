@@ -66,12 +66,12 @@ fi
 if [[ "${USER}" == "root" ]]; then
 	userStyle="${red}";
 else
-	userStyle="${blue}";
+	userStyle="${violet}";
 fi;
 
 # Highlight the hostname when connected via SSH.
 if [[ "${SSH_TTY}" ]]; then
-	hostStyle="${bold}${red}";
+	hostStyle="${bold}${orange}";
 else
 	hostStyle="${cyan}";
 fi;
@@ -195,9 +195,9 @@ function prompt_command() {
   PS1="\[\033]0;\W\007\]"; # working directory base name
   PS1+="\[${bold}\]\n"; # newline
   PS1+="\[${userStyle}\]\u"; # username
-  PS1+="\[${white}\] @ ";
+  PS1+="\[${white}\]@";
   PS1+="\[${hostStyle}\]\h"; # host
-  PS1+="\[${white}\] in ";
+  PS1+="\[${white}\] dans ";
   PS1+="\[${green}\]\w"; # working directory full path
 
   # I sometimes work on systems where a 'git status' command takes
@@ -215,7 +215,7 @@ function prompt_command() {
  #     if [ $prompt_program_installed_git == 1 ]
  #     then
 #	  # git: [branch:flags]
-	     PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+	     PS1+="\$(prompt_git \"\[${white}\] avec \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
  #     fi
 #  fi
   # misc: [cmd#:hist#]
