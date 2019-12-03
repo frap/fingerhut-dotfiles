@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 [[ "$1" == "source" ]] || \
 
-echo 'Dotfiles - "Gas" Andrés Gasson - http://frap.io/'
-
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 
 Usage: $(basename "$0")
@@ -54,11 +52,12 @@ else
 fi;
 
 # Logging stuff.
-function e_header()   { echo -e "\n${bold}$@${reset}"; }
+function e_header()   { echo -e "\n${bold}${white}$@${reset}"; }
 function e_success()  { echo -e " ${blue}✔  $@${reset}"; }
-function e_error()    { echo -e " ${bold}${red}✖  $@${reset}"; }
+function e_error()    { echo -e " ${red}✖  $@${reset}"; }
 function e_arrow()    { echo -e " ${bold}${yellow}➜${reset}  $@"; }
 
+e_header '\nDotfiles - "Gas" Andrés Gasson - http://frap.io/';
 # For testing.
 function assert() {
   local success modes equals actual expected
