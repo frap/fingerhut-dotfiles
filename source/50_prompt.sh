@@ -66,7 +66,7 @@ fi
 if [[ "${USER}" == "root" ]]; then
 	userStyle="${red}";
 else
-	userStyle="${violet}";
+	userStyle="${bold}${purple}";
 fi;
 
 # Highlight the hostname when connected via SSH.
