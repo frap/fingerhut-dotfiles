@@ -3,7 +3,7 @@
 # dirs  755 drwxr-xr-x (777 minus 022)
 umask 022
 
-# Always use color output for `ls`
+# Always use colour output for `ls`
 if is_osx; then
  if which /usr/local/bin/gls >/dev/null 2>&1
 then

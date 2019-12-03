@@ -16,3 +16,23 @@ function pingtest() {
   for c in say spd-say; do [[ "$(which $c)" ]] && break; done
   ping ${1:-8.8.8.8} | perl -pe '/bytes from/ && `'$c' ping`'
 }
+
+if which govc  >/dev/null 2>&1
+then
+    function vm.ip() {
+        govc vm.info -json $1 | jq -r .VirtualMachines[].Guest.Net[].IpAddress[0]
+    }
+    alias vm.poweron='govc vm.power -on=true ';
+    alias vm.poweroff='govc vm.power -off=true';
+    alias vm.dev.ls='govc device.ls -vm ';
+fi
+
+if which consul >/dev/null 2>&1
+then
+    alias cons.mem='consul members';
+fi
+
+if which curl >/dev/null 2>&1
+then
+    alias curl-trace='curl -w "$HOME/.curl-format" -o /dev/null -s'
+fi

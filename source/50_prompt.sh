@@ -83,7 +83,7 @@ alias prompt_getcolors='prompt_colors[9]=; local i; for i in ${!prompt_colors[@]
 # Exit code of previous command.
 function prompt_exitcode() {
   prompt_getcolors
-  [[ $1 != 0 ]] && echo " $c2erreur: $1$c9"
+  [[ $1 != 0 ]] && echo " ${red}erreur: $1${reset}"
 }
 
 # Git status.
