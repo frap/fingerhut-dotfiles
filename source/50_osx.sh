@@ -4,7 +4,7 @@ is_osx || return 1
 # APPLE, Y U PUT /usr/bin B4 /usr/local/bin?!
 prepend_to_path_if_exists "/usr/local/bin"
 prepend_to_path_if_exists "/opt/local/bin"
-prepend_to_path_if_exists "/opt/local/sbin"
+prepend_to_path_if_exists "/usr/local/sbin"
 
 # For some reason, these are not there by default:
 prepend_to_manpath_if_exists "/Developer/usr/share/man"

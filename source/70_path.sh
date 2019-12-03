@@ -1,3 +1,6 @@
+# OSX-only stuff. Abort if not OSX.
+is_osx || return 1
+
 MY_OS=`uname -s`
 MY_MACHINE=`uname -p`
 
