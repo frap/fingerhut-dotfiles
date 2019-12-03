@@ -13,6 +13,7 @@ recipes=(
   cowsay
   git
   git-extras
+  gls
   htop-osx
   hub
   id3tool
