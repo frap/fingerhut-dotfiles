@@ -232,3 +232,7 @@ function prompt_command() {
 }
 
 PROMPT_COMMAND="prompt_command"
+
+
+PS2="\[${yellow}\]→ \[${reset}\]";
+export PS2;
