@@ -39,11 +39,12 @@ e_header "Updating yum"
 # Install YUM packages.
 packages=(
 #  ansible
-  bin-utils
-#  cowsay
+  binutils
+  #  cowsay
   git-core
   htop
-  nmap-netcat
+  nmap
+  nmap-ncat
   #  id3tool
   #  libssl-dev
   socat
@@ -54,7 +55,7 @@ packages=(
 # update PIP
 e_header "Updating pip & setuptools"
 sudo pip install --upgrade pip
-sudo pip install -upgrade setuptools
+sudo pip install --upgrade setuptools
 
 if (( ${#packages[@]} > 0 )); then
   e_header "Installing YUM packages: ${packages[*]}"
