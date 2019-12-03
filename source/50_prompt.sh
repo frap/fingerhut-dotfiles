@@ -83,7 +83,7 @@ alias prompt_getcolors='prompt_colors[9]=; local i; for i in ${!prompt_colors[@]
 # Exit code of previous command.
 function prompt_exitcode() {
   prompt_getcolors
-  [[ $1 != 0 ]] && echo " $c2$1$c9"
+  [[ $1 != 0 ]] && echo " $c2erreur: $1$c9"
 }
 
 # Git status.
@@ -211,13 +211,13 @@ function prompt_command() {
   # prompt.  A user can do 'unset prompt_enable_vcs_info' in a shell
   # where they want to speed things up by not including this
   # information in the prompt.
-  if [[ "$prompt_enable_vcs_info" ]]; then
-      if [ $prompt_program_installed_git == 1 ]
-      then
-	  # git: [branch:flags]
+ # if [[ "$prompt_enable_vcs_info" ]]; then
+ #     if [ $prompt_program_installed_git == 1 ]
+ #     then
+#	  # git: [branch:flags]
 	     PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
-      fi
-  fi
+ #     fi
+#  fi
   # misc: [cmd#:hist#]
   # PS1="$PS1$c1[$c0#\#$c1:$c0!\!$c1]$c9"
   # path: [user@host:path]

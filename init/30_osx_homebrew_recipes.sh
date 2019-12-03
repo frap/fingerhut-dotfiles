@@ -29,6 +29,7 @@ recipes=(
   reattach-to-user-namespace
   ripgrep
   sl
+  socat
   ssh-copy-id
   terminal-notifier
   thefuck
