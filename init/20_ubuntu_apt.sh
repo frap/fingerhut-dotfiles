@@ -41,16 +41,16 @@ sudo apt-get -qq dist-upgrade
 packages=(
 #  ansible
   build-essential
-#  cowsay
+  #  cowsay
+  curl
   git-core
   jq
 #  htop
 #  id3tool
 #  libssl-dev
-#  mate-terminal
   #  silversearcher-ag
   socat
-  sshfs
+#  sshfs
 #  synaptic
 #  telnet
   tree

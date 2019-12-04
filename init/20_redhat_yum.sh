@@ -40,6 +40,7 @@ e_header "Updating yum"
 packages=(
 #  ansible
   binutils
+  curl
   #  cowsay
   git-core
   htop
