@@ -43,18 +43,18 @@ packages=(
   build-essential
 #  cowsay
   git-core
+  jq
 #  htop
 #  id3tool
 #  libssl-dev
-  mate-terminal
-  silversearcher-ag
+#  mate-terminal
+  #  silversearcher-ag
+  socat
   sshfs
-  synaptic
-  telnet
+#  synaptic
+#  telnet
   tree
   vim
-  xdiskusage
-  xdu
 )
 
 ubuntu_release=`lsb_release -s -r`
