@@ -1,5 +1,4 @@
-#!/usr/bin/env flk
-; from gherkin: https://github.com/alandipert/gherkin/blob/master/fib.gk
+#!/usr/bin/env bb
 
 (defn fib* (a b n)
   (if (> n 0)
