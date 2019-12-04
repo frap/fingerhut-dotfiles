@@ -18,46 +18,43 @@ brew cask info this-is-somewhat-annoying 2>/dev/null
 # Homebrew casks
 casks=(
   # Applications
-  a-better-finder-rename
-  alfred
-  android-platform-tools
-  bartender
-  battle-net
-  bettertouchtool
-  charles
-  chromium
-  chronosync
+  #a-better-finder-rename
+  #alfred
+ # android-platform-tools
+ # bartender
+  #battle-net
+  #bettertouchtool
+  #charles
+ # chromium
+ # chronosync
  # controllermate
-  docker
+ # docker
   #dropbox
-  fastscripts
-  firefox
+  #fastscripts
+ # firefox
   gyazo
   hex-fiend
-  iterm2
-  karabiner-elements
- # macvim
  # messenger-for-desktop
-  midi-monitor
-  moom
-  omnidisksweeper
-  race-for-the-galaxy
-  reaper
-  robo-3t
-  screenhero
-  scroll-reverser
-  skype
-  slack
-  sourcetree
-  spotify
-  steam
+ # midi-monitor
+ # moom
+ # omnidisksweeper
+  #race-for-the-galaxy
+ # reaper
+ # robo-3t
+ # screenhero
+ # scroll-reverser
+ # skype
+ # slack
+ # sourcetree
+  #spotify
+ # steam
   the-unarchiver
-  totalfinder
-  tower
+ # totalfinder
+  #tower
   vagrant
-  virtualbox
-  vlc
-  ynab
+ # virtualbox
+ # vlc
+ # ynab
   # Quick Look plugins
   betterzipql
   qlcolorcode
@@ -70,8 +67,8 @@ casks=(
   suspicious-package
   webpquicklook
   # Color pickers
-  colorpicker-developer
-  colorpicker-skalacolor
+  #colorpicker-developer
+  #colorpicker-skalacolor
   # Fonts
   font-m-plus
   font-mplus-nerd-font
