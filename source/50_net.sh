@@ -34,5 +34,5 @@ fi
 
 if which curl >/dev/null 2>&1
 then
-    alias curl-trace='curl -w "$HOME/.curl-format" -o /dev/null -s'
+    alias curl-trace='curl -w "@$HOME/.curl-format" -o /dev/null -s'
 fi
