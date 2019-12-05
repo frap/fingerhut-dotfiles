@@ -38,9 +38,10 @@ e_header "Updating yum"
 
 # install ripgrep
 if which rg >/dev/null 2>&1
+  then
     e_header "Installing ripgrep"
-   sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
-   sudo yum install ripgrep
+    sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
+    sudo yum install ripgrep
 fi
 
 # Install YUM packages.
