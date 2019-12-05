@@ -1,0 +1,54 @@
+{:paths ["src" "resources"]
+
+ :deps {org.clojure/clojure {:mvn/version "1.10.1"}
+        org.clojure/clojurescript {:mvn/version "1.10.597"}
+        org.clojure/core.async {:mvn/version "0.5.527"}
+      ;;  aero {:mvn/version "1.1.3"}
+
+        com.zaxxer/HikariCP {:mvn/version "3.4.1"}
+        honeysql {:mvn/version "0.9.8"}
+        integrant {:mvn/version "0.7.0"}
+        aleph {:mvn/version "0.4.7-alpha5"}
+        io.jesi/backpack {:mvn/version "3.7.0"}
+        org.clojure/tools.logging {:mvn/version "0.5.0"}
+        org.postgresql/postgresql {:mvn/version "42.2.8"}
+        org.flywaydb/flyway-core {:mvn/version "6.0.8"}
+
+        ;; time
+        tick {:mvn/version "0.4.20-alpha"}
+        jarohen/chime {:mvn/version "0.2.2"}
+
+        ;; Atea modules
+        juxt.edge/edge.system {:local/root "../lib/edge.system"}
+        atea/app.logging {:local/root "./lib/atea.app.logging"}
+
+        ring/ring-jetty-adapter {:mvn/version "1.7.1"}
+        seancorfield/next.jdbc {:mvn/version "1.0.10"}}
+
+ :aliases
+ {:dev {:extra-paths ["dev" "test"]
+        :extra-deps {org.clojure/test.check {:mvn/version "0.9.0"}
+                     atea/lib.app.dev {:local/root "../lib/atea.app.dev"}
+                     atea/test-utils {:local/root "../lib/edge.test-utils"}
+                     }}
+
+  :build {:extra-deps
+            {juxt.edge/kick {:local/root "../lib/edge.kick"}
+             juxt/kick.alpha
+               {:git/url "https://github.com/juxt/kick.alpha.git"
+                :sha "06063beadfa72dfe23480727c347976b608e8316"}
+             com.bhauman/figwheel-main {:mvn/version "0.2.3"}
+             }
+           }
+
+  :build/once {:main-opts ["-m edge.kick"]}
+
+  :dev/build
+    {:extra-paths ["target/dev"]}
+
+  :prod/build
+  {:extra-paths ["target/prod"]}
+  }
+
+}
+
