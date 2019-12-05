@@ -48,13 +48,10 @@ packages=(
 #  ansible
   binutils
   curl
-  #  cowsay
   git-core
   htop
   nmap
   nmap-ncat
-  #  id3tool
-  #  libssl-dev
   socat
   tree
   tcpdump

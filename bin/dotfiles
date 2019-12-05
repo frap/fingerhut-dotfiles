@@ -52,10 +52,10 @@ else
 fi;
 
 # Logging stuff.
-function e_header()   { echo -e "\n${bold}${white}$@${reset}"; }
-function e_success()  { echo -e " ${blue}✔  $@${reset}"; }
-function e_error()    { echo -e " ${red}✖  $@${reset}"; }
-function e_arrow()    { echo -e " ${bold}${yellow}➜${reset}  $@"; }
+function e_header()   { echo -e "\n${bold}$@${reset}"; }
+function e_success()  { echo -e " ${bold}${blue}✔${reset} $@"; }
+function e_error()    { echo -e " ${bold}${red}✖  $@${reset}"; }
+function e_arrow()    { echo -e " ${bold}${yellow}➜${reset} $@"; }
 
 e_header '\nDotfiles - "Gas" Andrés Gasson - http://frap.io/';
 # For testing.
@@ -326,7 +326,7 @@ if [[ ! -d $DOTFILES ]]; then
   new_dotfiles_install=1
   prompt_delay=10
   e_header "Le téléchargement de dotfiles"
-  git clone --recursive git://github.com/${github_user:-frap}/fingerhut-dotfiles.git $DOTFILES
+  git clone --recursive git://github.com/${github_user:-frap}/atea-dotfiles.git $DOTFILES
   cd $DOTFILES
 elif [[ "$1" != "restart" ]]; then
   # Make sure we have the latest files.
