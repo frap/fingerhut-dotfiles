@@ -41,20 +41,14 @@ sudo apt-get -qq dist-upgrade
 packages=(
 #  ansible
   build-essential
-#  cowsay
+  #  cowsay
+  curl
   git-core
-#  htop
-#  id3tool
-#  libssl-dev
-  mate-terminal
-  silversearcher-ag
-  sshfs
-  synaptic
-  telnet
+  jq
+  ripgrep
+  socat
   tree
   vim
-  xdiskusage
-  xdu
 )
 
 ubuntu_release=`lsb_release -s -r`
