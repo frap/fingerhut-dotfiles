@@ -6,9 +6,9 @@ umask 022
 # Always use colour output for `ls`
 if is_osx; then
  if which /usr/local/bin/gls >/dev/null 2>&1
-then
+  then
   #       make ls mark directories (F),
-#       show all files except . and .. (A), and show sizes (s)
+  #       show all files except . and .. (A), and show sizes (s)
       alias ls="/usr/local/bin/gls --color -sAF"
       alias ll="/usr/local/bin/gls --color -alhFtr"
       alias  l="/usr/local/bin/gls --color -alhF"

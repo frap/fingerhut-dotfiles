@@ -36,6 +36,13 @@ fi
 e_header "Updating yum"
 	sudo yum -y update
 
+# install ripgrep
+if which rg >/dev/null 2>&1
+    e_header "Installing ripgrep"
+   sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
+   sudo yum install ripgrep
+fi
+
 # Install YUM packages.
 packages=(
 #  ansible

@@ -45,14 +45,8 @@ packages=(
   curl
   git-core
   jq
-#  htop
-#  id3tool
-#  libssl-dev
-  #  silversearcher-ag
+  ripgrep
   socat
-#  sshfs
-#  synaptic
-#  telnet
   tree
   vim
 )
