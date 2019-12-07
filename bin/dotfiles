@@ -57,7 +57,7 @@ function e_success()  { echo -e " ${blue}✔  $@${reset}"; }
 function e_error()    { echo -e " ${red}✖  $@${reset}"; }
 function e_arrow()    { echo -e " ${bold}${yellow}➜${reset}  $@"; }
 
-e_header '\nDotfiles - "Gas" Andrés Gasson - http://frap.io/';
+e_header 'Dotfiles - "Gas" Andrés Gasson - http://frap.io/';
 # For testing.
 function assert() {
   local success modes equals actual expected
