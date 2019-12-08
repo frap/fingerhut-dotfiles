@@ -1,0 +1,40 @@
+{:deps {org.clojure/clojure {:mvn/version "1.10.1"}
+        org.clojure/clojurescript {:mvn/version "1.10.597"}
+
+        day8.re-frame/http-fx #:mvn{:version "v0.2.0"}
+        re-frame #:mvn{:version "0.10.9"}
+        reagent #:mvn{:version "0.8.1"}
+
+        aero {:mvn/version "1.1.3"}
+
+        ;; Logging
+        org.clojure/tools.logging {:mvn/version "0.5.0"}
+        org.slf4j/jcl-over-slf4j {:mvn/version "1.7.29"}
+        org.slf4j/jul-to-slf4j {:mvn/version "1.7.29"}
+        org.slf4j/log4j-over-slf4j {:mvn/version "1.7.29"}
+        ch.qos.logback/logback-classic {:mvn/version "1.2.3"
+                                        :exclusions [org.slf4j/slf4j-api]}
+
+        }
+
+ :paths ["src" "resources"]
+
+ :aliases
+ {:build {:main-opts ["-m" "figwheel.main" "--build" "dev" "--repl"]}
+  :min   {:main-opts ["-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]}
+  :fig {:extra-deps
+        {com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
+         com.bhauman/figwheel-main {:mvn/version "0.2.3"}
+         devcards         {:mvn/version "0.2.6"}
+
+         io.aviso/pretty {:mvn/version "0.1.37"}
+         fipp {:mvn/version "0.6.21"}
+         ;; re-frame
+         day8.re-frame/test {:mvn/version "0.1.5"}
+         org.clojure/test.check {:mvn/version "0.10.0"}
+         }
+        :extra-paths ["dev" "target" "test"]}
+  :test  {:main-opts ["-m" "figwheel.main" "-co" "test.cljs.edn" "-m" "re-partee.cmd-test-runner"]}
+
+  }
+ }
