@@ -1,6 +1,6 @@
 #!/usr/bin/env bb
 
-(defn fib* (a b n)
+(defn fib* [a b n]
   (if (> n 0)
     (fib* b (+ a b) (- n 1))
     a))
