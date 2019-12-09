@@ -2,7 +2,7 @@
 is_ubuntu || return 1
 
 # If the old files isn't removed, the duplicate APT alias will break sudo!
-sudoers_old="/etc/sudoers.d/sudoers-cowboy"; [[ -e "$sudoers_old" ]] && sudo rm "$sudoers_old"
+sudoers_old="/etc/sudoers.d/atearoot"; [[ -e "$sudoers_old" ]] && sudo rm "$sudoers_old"
 
 # Installing this sudoers file makes life easier.
 sudoers_file="sudoers-dotfiles"
@@ -61,6 +61,16 @@ then
 else
     packages+=(emacs24)
 fi
+
+# https://be5invis.github.io/Iosevka/
+# https://launchpad.net/~laurent-boulard/+archive/ubuntu/fonts
+add_ppa ppa:laurent-boulard/fonts
+apt_packages+=(fonts-iosevka)
+  
+# https://discordapp.com/download
+deb_installed+=(/usr/bin/discord)
+deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
+  
 
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
 
