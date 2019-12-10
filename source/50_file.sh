@@ -4,7 +4,7 @@
 umask 022
 
 # Always use colour output for `ls`
-if is_osx; then
+#if is_osx; then
  if which /usr/local/bin/gls >/dev/null 2>&1
   then
   #       make ls mark directories (F),
@@ -17,7 +17,7 @@ if is_osx; then
       alias dir="/usr/local/bin/gls --color=auto"
  fi
 else
- test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias ll='ls -alhFtr'
     alias  l='ls -alhF'
@@ -31,9 +31,6 @@ fi
 if [[ "$(type -P tree)" ]]; then
   alias ll='tree --dirsfirst -aLpughDFiC 1'
   alias lsd='ll -d'
-else
-  alias ll='ls -al'
-  alias lsd='CLICOLOR_FORCE=1 ll | grep --color=never "^d"'
 fi
 
 # Easier navigation: .., ..., -

@@ -20,7 +20,7 @@ casks=(
   # Applications
   #a-better-finder-rename
   #alfred
- # android-platform-tools
+ android-platform-tools
  # bartender
   #battle-net
   #bettertouchtool
@@ -28,7 +28,10 @@ casks=(
  # chromium
  # chronosync
  # controllermate
- # docker
+  docker
+  font-fira-code
+  font-isoveka
+  font-fontawesome
   #dropbox
   #fastscripts
  # firefox
@@ -37,6 +40,7 @@ casks=(
  # messenger-for-desktop
  # midi-monitor
  # moom
+ mactex-no-gui
  # omnidisksweeper
   #race-for-the-galaxy
  # reaper

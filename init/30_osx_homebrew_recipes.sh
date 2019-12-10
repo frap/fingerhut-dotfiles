@@ -26,6 +26,7 @@ recipes=(
   lesspipe
   man2html
   nmap
+  nvm
   reattach-to-user-namespace
   ripgrep
   sl
