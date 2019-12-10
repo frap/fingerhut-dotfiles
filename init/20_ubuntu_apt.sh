@@ -1,6 +1,24 @@
 # Ubuntu-only stuff. Abort if not Ubuntu.
 is_ubuntu || return 1
 
+apt_keys=()
+apt_source_files=()
+apt_source_texts=()
+apt_packages=()
+deb_installed=()
+deb_sources=()
+
+installers_path="$DOTFILES/caches/installers"
+
+# Ubuntu distro release name, eg. "xenial"
+release_name=$(lsb_release -c | awk '{print $2}')
+
+function add_ppa() {
+  apt_source_texts+=($1)
+  IFS=':/' eval 'local parts=($1)'
+  apt_source_files+=("${parts[1]}-ubuntu-${parts[2]}-$release_name")
+}
+
 # If the old files isn't removed, the duplicate APT alias will break sudo!
 sudoers_old="/etc/sudoers.d/atearoot"; [[ -e "$sudoers_old" ]] && sudo rm "$sudoers_old"
 
@@ -32,24 +50,31 @@ EOF
   fi
 fi
 
-# Update APT.
-e_header "Updating APT"
-sudo apt-get -qq update
-sudo apt-get -qq dist-upgrade
+#############################
+# WHAT DO WE NEED TO INSTALL?
+#############################
 
 # Install APT packages.
 packages=(
 #  ansible
   build-essential
-  #  cowsay
+  cmatrix
+  cowsay
   curl
+  docker.io
+  docker-compose
   git-core
+  imagemagick
   jq
+  nmap
   ripgrep
   socat
+  thefuck
   tree
   vim
 )
+
+
 
 ubuntu_release=`lsb_release -s -r`
 if [[ "${ubuntu_release}" > "19" ]]
@@ -62,15 +87,25 @@ else
     packages+=(emacs24)
 fi
 
-# https://be5invis.github.io/Iosevka/
-# https://launchpad.net/~laurent-boulard/+archive/ubuntu/fonts
-add_ppa ppa:laurent-boulard/fonts
-apt_packages+=(fonts-iosevka)
+if is_ubuntu_desktop; then
+
+
+  # https://www.ubuntuupdates.org/ppa/google_chrome
+  apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
+  apt_source_files+=(google-chrome)
+  apt_source_texts+=("deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main")
+  apt_packages+=(google-chrome-stable)
   
-# https://discordapp.com/download
-deb_installed+=(/usr/bin/discord)
-deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
+  # https://be5invis.github.io/Iosevka/
+  # https://launchpad.net/~laurent-boulard/+archive/ubuntu/fonts
+  add_ppa ppa:laurent-boulard/fonts
+  apt_packages+=(fonts-iosevka)
   
+  # https://discordapp.com/download
+  deb_installed+=(/usr/bin/discord)
+  deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
+  
+fi
 
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
 
