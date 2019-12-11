@@ -15,8 +15,7 @@ umask 022
       alias lls="/usr/local/bin/gls --color -alhSr"
       alias la="/usr/local/bin/gls --color -Atr"
       alias dir="/usr/local/bin/gls --color=auto"
- fi
-else
+ else
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias ll='ls -alhFtr'
