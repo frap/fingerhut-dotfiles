@@ -6,9 +6,9 @@ is_osx || return 1
 
 # Ensure the cask kegs are installed.
 kegs=(
-  caskroom/cask
-  caskroom/drivers
-  caskroom/fonts
+  homebrew/cask-cask
+  homebrew/cask-drivers
+  homebrew/cask-fonts
 )
 brew_tap_kegs
 
@@ -32,10 +32,11 @@ casks=(
   font-fira-code
   font-isoveka
   font-fontawesome
+  gimp
   #dropbox
   #fastscripts
- # firefox
-  gyazo
+  firefox
+  #gyazo
   hex-fiend
  # messenger-for-desktop
  # midi-monitor
@@ -52,12 +53,13 @@ casks=(
  # sourcetree
   #spotify
  # steam
-  the-unarchiver
+ the-unarchiver
+ tunnelblick
  # totalfinder
   #tower
-  vagrant
- # virtualbox
- # vlc
+#  vagrant
+#  virtualbox
+  vlc
  # ynab
   # Quick Look plugins
   betterzipql
