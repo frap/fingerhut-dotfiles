@@ -36,7 +36,7 @@ casks=(
   #dropbox
   #fastscripts
   firefox
-  gyazo
+  #gyazo
   hex-fiend
  # messenger-for-desktop
  # midi-monitor
