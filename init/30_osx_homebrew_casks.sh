@@ -32,9 +32,10 @@ casks=(
   font-fira-code
   font-isoveka
   font-fontawesome
+  gimp
   #dropbox
   #fastscripts
- # firefox
+  firefox
   gyazo
   hex-fiend
  # messenger-for-desktop
@@ -52,12 +53,13 @@ casks=(
  # sourcetree
   #spotify
  # steam
-  the-unarchiver
+ the-unarchiver
+ tunnelblick
  # totalfinder
   #tower
   vagrant
- # virtualbox
- # vlc
+  virtualbox
+  vlc
  # ynab
   # Quick Look plugins
   betterzipql
