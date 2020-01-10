@@ -5,9 +5,9 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias home='cd ~'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
+#alias ..='cd ..'
+#alias ...='cd ../..'
+#alias ....='cd ../../..'
 alias '?=man'
 
 if which gls >/dev/null 2>&1
@@ -82,13 +82,15 @@ alias vac='source .venv/bin/activate'
 # systemd specific aliases
 # ---------------------------------
 if [ -x /etc/systemd ]; then
-   alias tt='sudo journalctl -u tomcat -o cat -f'
+   alias sctl='sudo systemctl'
+   alias jctl='sudo journalctl'
+   alias tt='jctl -u tomcat -o cat -f'
    alias tomcattail=tt
-   alias tt2day='sudo journalctl -u tomcat -o cat -S today'
-   alias tt2min='sudo journalctl -u tomcat -o cat -S "2 minutes ago"'
-   alias tt5min='sudo journalctl -u tomcat -o cat -S "5 minutes ago"'
+   alias tt2day='jctl -u tomcat -o cat -S today'
+   alias tt2min='jctl -u tomcat -o cat -S "2 minutes ago"'
+   alias tt5min='ctl -u tomcat -o cat -S "5 minutes ago"'
 
-   alias tcrst='sudo systemctl restart tomcat'
+   alias tcrst='sctl restart tomcat'
    alias restarttomcat=tcrst
 fi
 
