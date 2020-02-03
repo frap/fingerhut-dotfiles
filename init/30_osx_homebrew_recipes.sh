@@ -12,6 +12,7 @@ recipes=(
   coreutils
   cowsay
   findutils
+  gd
   git
   git-extras
   gnu-indent
@@ -24,8 +25,11 @@ recipes=(
   id3tool
   jq
   lesspipe
+  libomp
+  lzo
   man2html
   nmap
+  nvm
   reattach-to-user-namespace
   ripgrep
   sl

@@ -1,16 +1,49 @@
 # OSX-only stuff. Abort if not OSX.
 is_osx || return 1
 
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob;
+
+# Append to the Bash history file, rather than overwriting it
+shopt -s histappend;
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
+
+# Enable some Bash 4 features when possible:
+# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
+# * Recursive globbing, e.g. `echo **/*.txt`
+for option in autocd globstar; do
+    shopt -s "$option" 2> /dev/null;
+done;
+
+# Add tab completion for many Bash commands
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && source "/usr/local/etc/profile.d/bash_completion.sh"
+
+
+# Enable tab completion for `g` by marking it as an alias for `git`
+if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+    complete -o default -o nospace -F _git g;
+fi;
+
+# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+# Add tab completion for `defaults read|write NSGlobalDomain`
+# You could just use `-g` instead, but I like being explicit
+complete -W "NSGlobalDomain" defaults;
+
+# Add `killall` tab completion for common apps
+complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal" killall;
+
+    
 # APPLE, Y U PUT /usr/bin B4 /usr/local/bin?!
 prepend_to_path_if_exists "/usr/local/bin"
 prepend_to_path_if_exists "/opt/local/bin"
 prepend_to_path_if_exists "/usr/local/sbin"
 
 # For some reason, these are not there by default:
-prepend_to_manpath_if_exists "/Developer/usr/share/man"
-prepend_to_manpath_if_exists "/Developer/usr/X11/share/man"
-prepend_to_manpath_if_exists "/Developer/usr/llvm-gcc-4.2/share/man"
-
 prepend_to_manpath_if_exists "/opt/local/share/man"
 prepend_to_manpath_if_exists "$HOME/share/man"
 prepend_to_manpath_if_exists "/usr/share/man"
@@ -78,3 +111,7 @@ function txt_sub_restore() {
   )
   for cmd in "${cmds[@]}"; do /usr/libexec/PlistBuddy -c "$cmd" "$prefs"; done
 }
+
+export EDITOR="ec"
+export VISUAL="$EDITOR"
+export ALTERNATE_EDITOR=""

@@ -73,11 +73,17 @@ function is_osx() {
 function is_ubuntu() {
   [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1
 }
+function is_ubuntu_desktop() {
+  dpkg -l ubuntu-desktop >/dev/null 2>&1 || return 1
+}
 function is_redhat() {
   [[ "$(cat /etc/redhat-release 2> /dev/null)" =~ "Red Hat" ]] || return 1
 }
+function is_linux() {
+  is_ubuntu || is_redhat
+}
 function get_os() {
-  for os in osx ubuntu redhat; do
+  for os in osx ubuntu ubuntu_desktop redhat linux; do
     is_$os; [[ $? == ${1:-0} ]] && echo $os
   done
 }
@@ -199,7 +205,7 @@ function setdiff() {
 ###########################################
 # INTERNAL DOTFILES "INIT" VARS / FUNCTIONS
 ###########################################
-e_header '\nDotfiles - "Gas" Andrés Gasson - http://frap.io/';
+e_header 'Dotfiles - "Gas" Andrés Gasson - http://frap.github.io/';
 # Initialise.
 init_file=$DOTFILES/caches/init/selected
 function init_files() {

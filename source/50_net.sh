@@ -19,6 +19,9 @@ function pingtest() {
 
 if which govc  >/dev/null 2>&1
 then
+    export GOVC_URL=https://administrator@vsphere.local:${VCENTER_PASS}@vcenter.ateasystems.com
+    export GOVC_TLS_KNOWN_HOSTS=~/.govc_known_hosts
+    export GOVC_INSECURE=true
     function vm.ip() {
         govc vm.info -json $1 | jq -r .VirtualMachines[].Guest.Net[].IpAddress[0]
     }
@@ -36,3 +39,4 @@ if which curl >/dev/null 2>&1
 then
     alias curl-trace='curl -w "@$HOME/.curl-format" -o /dev/null -s'
 fi
+
