@@ -84,11 +84,12 @@ alias vac='source .venv/bin/activate'
 if [ -x /etc/systemd ]; then
    alias sctl='sudo systemctl'
    alias jctl='sudo journalctl'
-   alias tt='jctl -u tomcat -o cat -f'
+   alias ccze='ccze -A -o nolookups'
+   alias tt='jctl -u tomcat -f | ccze'
    alias tomcattail=tt
-   alias tt2day='jctl -u tomcat -o cat -S today'
-   alias tt2min='jctl -u tomcat -o cat -S "2 minutes ago"'
-   alias tt5min='ctl -u tomcat -o cat -S "5 minutes ago"'
+   alias tt2day='jctl -u tomcat -o cat -S today | ccze'
+   alias tt2min='jctl -u tomcat -o cat -S "2 minutes ago" | ccze'
+   alias tt5min='jctl -u tomcat -o cat -S "5 minutes ago" | ccze'
 
    alias tcrst='sctl restart tomcat'
    alias restarttomcat=tcrst

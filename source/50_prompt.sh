@@ -83,7 +83,7 @@ alias prompt_getcolors='prompt_colors[9]=; local i; for i in ${!prompt_colors[@]
 # Exit code of previous command.
 function prompt_exitcode() {
   prompt_getcolors
-  [[ $1 != 0 ]] && echo " ${red}erreur: $1${reset}"
+  [[ $1 != 0 ]] && echo " ${red}erreur: $1${reset}\n"
 }
 
 # Git status.
@@ -197,7 +197,7 @@ function prompt_command() {
   PS1+="\[${userStyle}\]\u"; # username
   PS1+="\[${white}\]@";
   PS1+="\[${hostStyle}\]\h"; # host
-  PS1+="\[${white}\] dans ";
+  PS1+="\[${white}\] in ";
   PS1+="\[${green}\]\w"; # working directory full path
 
   # I sometimes work on systems where a 'git status' command takes
@@ -215,7 +215,7 @@ function prompt_command() {
  #     if [ $prompt_program_installed_git == 1 ]
  #     then
 #	  # git: [branch:flags]
-	     PS1+="\$(prompt_git \"\[${white}\] avec \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+	     PS1+="\$(prompt_git \"\[${white}\] with \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
  #     fi
 #  fi
   # misc: [cmd#:hist#]
