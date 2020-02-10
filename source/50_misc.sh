@@ -62,9 +62,9 @@ alias search='find \!:1 -type f -exec grep -i -n \!:2 '{}' /dev/null \;'
 IGNOREEOF=10
 
 # "fuck"
-if [[ "$(which thefuck)" ]]; then
-  eval $(thefuck --alias)
-fi
+#if [[ "$(which thefuck)" ]]; then
+#  eval $(thefuck --alias)
+#fi
 
 # Run a command repeatedly in a loop, with a delay (defaults to 1 sec).
 # Usage:
