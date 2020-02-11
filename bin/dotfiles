@@ -88,6 +88,54 @@ function get_os() {
   done
 }
 
+# Service detection
+function has_ripgrep() {
+  [[ command -v rg >/dev/null 2>&1 ]] || return 1
+    }
+
+function has_gls() {
+  [[ command -v gls >/dev/null 2>&1 ]] || return 1
+    }
+
+function has_docker() {
+  [[ command -v docker >/dev/null 2>&1 ]] || return 1
+    }
+
+function has_java() {
+  [[ command -v java >/dev/null 2>&1 ]] || return 1
+    }
+
+function has_clojure() {
+  [[ command -v clojure >/dev/null 2>&1 ]] || return 1
+    }
+
+function has_nvm() {
+  [[ command -v nvm >/dev/null 2>&1 ]] || return 1
+    }
+
+function has_tomcat() {
+  [[ -e /opt/tomcat_latest/bin ]] || return 1
+    }
+
+function has_systemd() {
+  [[ -e /etc/systemd ]] || return 1
+    }
+
+function has_gpg_agent() {
+  [[ command -v gpg-connect-agent >/dev/null 2>&1 ]] || return 1
+    }
+
+function has_ssh_agent() {
+  [[ command -v ssh-agent >/dev/null 2>&1 ]] || return 1
+    }
+
+
+function has_app() {
+  for app in docker nvm tomcat java clojure ripgrep gls gpg_agent ssh_agent systemd; do
+    has_$app; [[ $? == ${1:-0} ]] && echo $app
+  done
+}
+
 # Remove an entry from $PATH
 # Based on http://stackoverflow.com/a/2108540/142339
 function path_remove() {
