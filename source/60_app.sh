@@ -17,7 +17,7 @@ else
     alias vdir='vdir --color=auto'
 fi
 
-if has_ripgrep
+if command -v rg >/dev/null 2>&1
 then
     alias grep='rg'
 else
@@ -26,14 +26,14 @@ else
     alias egrep='egrep --color=auto'
 fi
 
-if has_nvm && is_osx
+if is_osx
 then
     export NVM_DIR="$HOME/.nvm"
     [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
     [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion" 
 fi
 
-if has_nvm && is_redhat && [[ -r /atea/home/atearoot ]]
+if is_redhat && [[ -r /atea/home/atearoot ]]
 then
     export NVM_DIR="/atea/home/atearoot/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
