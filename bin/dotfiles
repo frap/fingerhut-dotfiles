@@ -100,6 +100,10 @@ function has_java() {
     (command -v java >/dev/null 2>&1) || return 1
 }
 
+function has_rg() {
+    (command -v rg >/dev/null 2>&1) || return 1
+}
+
 function has_tomcat() {
   [[ -e /opt/tomcat_latest/bin ]] || return 1
     }
@@ -117,7 +121,7 @@ function has_ssh_agent() {
     }
 
 function has_app() {
-  for app in docker tomcat java gls gpg_agent ssh_agent systemd; do
+  for app in docker gls gpg_agent java rg ssh_agent systemd tomcat; do
     has_$app; [[ $? == ${1:-0} ]] && echo $app
   done
 }

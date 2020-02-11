@@ -17,7 +17,7 @@ else
     alias vdir='vdir --color=auto'
 fi
 
-if command -v rg >/dev/null 2>&1
+if has_rg
 then
     alias grep='rg'
 else
