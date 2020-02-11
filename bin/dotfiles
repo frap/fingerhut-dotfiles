@@ -89,15 +89,15 @@ function get_os() {
 }
 # Service detection
 function has_gls() {
-  [[ $(command -v /usr/local/bin/gls >/dev/null 2>&1) ]] || return 1
+  (command -v /usr/local/bin/gls >/dev/null 2>&1) || return 1
     }
 
 function has_docker() {
-  [[ $(command -v docker >/dev/null 2>&1) ]] || return 1
+   (command -v docker >/dev/null 2>&1) || return 1
     }
 
 function has_java() {
-    [[ $(command -v java >/dev/null 2>&1) ]] || return 1
+    (command -v java >/dev/null 2>&1) || return 1
 }
 
 function has_tomcat() {
@@ -109,13 +109,12 @@ function has_systemd() {
     }
 
 function has_gpg_agent() {
-  [[ $(command -v gpg-connect-agent >/dev/null 2>&1) ]] || return 1
+  (command -v gpg-connect-agent >/dev/null 2>&1)  || return 1
     }
 
 function has_ssh_agent() {
-  [[ $(command -v ssh-agent >/dev/null 2>&1) ]] || return 1
+  (command -v ssh-agent >/dev/null 2>&1) || return 1
     }
-
 
 function has_app() {
   for app in docker tomcat java gls gpg_agent ssh_agent systemd; do
