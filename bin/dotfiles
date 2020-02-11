@@ -52,7 +52,7 @@ else
 fi;
 
 # Logging stuff.
-function e_header()   { echo -e "\n${bold}{cyan}$@${reset}"; }
+function e_header()   { echo -e "\n${bold}${cyan}$@${reset}"; }
 function e_success()  { echo -e " ${bold}${blue}✔${reset} $@"; }
 function e_error()    { echo -e " ${bold}${red}✖  $@${reset}"; }
 function e_arrow()    { echo -e " ${bold}${yellow}➜${reset} $@"; }
