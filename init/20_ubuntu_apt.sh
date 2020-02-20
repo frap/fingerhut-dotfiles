@@ -64,7 +64,7 @@ packages=(
   docker.io
   docker-compose
   git-core
-  imagemagick
+#  imagemagick
   jq
   nmap
   ripgrep
@@ -77,15 +77,15 @@ packages=(
 
 
 ubuntu_release=`lsb_release -s -r`
-if [[ "${ubuntu_release}" > "19" ]]
-then
-    packages+=(emacs-gtk)
-elif [[ "${ubuntu_release}" > "18" ]]
-then
-    packages+=(emacs25)
-else
-    packages+=(emacs24)
-fi
+#if [[ "${ubuntu_release}" > "19" ]]
+#then
+#    packages+=(emacs-gtk)
+#elif [[ "${ubuntu_release}" > "18" ]]
+#then
+#    packages+=(emacs25)
+#else
+#    packages+=(emacs24)
+#fi
 
 if is_ubuntu_desktop; then
 
