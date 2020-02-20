@@ -46,7 +46,7 @@ alias ds='dirs -v'
 alias du='du -k'
 alias hd='hexdump -C'
 
-if has_clojure
+if has_clojure; then
    alias repl='clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"}}}" -m rebel-readline.main'
 fi
 # Will recursively search every file in the directory tree starting with node
