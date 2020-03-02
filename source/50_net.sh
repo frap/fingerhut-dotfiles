@@ -43,7 +43,8 @@ fi
 getIP()  {
   curr_hostname=$(hostname -s)
   interface=${1:-eth0}
-    if command -v  perldoc -l Regexp::Common >/dev/null 2>&1 ; then
+  perldoc -l Regexp::Common >/dev/null 2>&1 
+  if [ $? -eq 0  ]  ; then
         local ip=$(ifconfig $interface | perl -MRegexp::Common -lne 'print $1 if /($RE{net}{IPv4})/' | grep -v "127.0.0.1")
     else
         local ip=$(ip -o -4 add list $interface | awk '{print $4}' | cut -d/ -f1)
