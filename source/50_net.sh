@@ -30,13 +30,23 @@ then
     alias vm.dev.ls='govc device.ls -vm ';
 fi
 
-if which consul >/dev/null 2>&1
+if hash consul 2>/dev/null
 then
     alias cons.mem='consul members';
 fi
 
-if which curl >/dev/null 2>&1
+if hash curl 2>/dev/null
 then
     alias curl-trace='curl -w "@$HOME/.curl-format" -o /dev/null -s'
 fi
 
+getIP()  {
+  curr_hostname=$(hostname -s)
+  interface=${1:-eth0}
+    if command -v  perldoc -l Regexp::Common >/dev/null 2>&1 ; then
+        local ip=$(ifconfig $interface | perl -MRegexp::Common -lne 'print $1 if /($RE{net}{IPv4})/' | grep -v "127.0.0.1")
+    else
+        local ip=$(ip -o -4 add list $interface | awk '{print $4}' | cut -d/ -f1)
+    fi
+    e_arrow "$interface=$ip"
+}
