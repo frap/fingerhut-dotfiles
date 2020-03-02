@@ -72,23 +72,23 @@ function get_os() {
 }
 # Service detection
 function has_gls() {
-  (command -v /usr/local/bin/gls >/dev/null 2>&1) || return 1
+   hash gls 2>/dev/null || return 1
     }
 
 function has_docker() {
-   (command -v docker >/dev/null 2>&1) || return 1
+   hash docker 2>/dev/null || return 1
     }
 
 function has_java() {
-    (command -v java >/dev/null 2>&1) || return 1
+    hash java 2>/dev/null || return 1
 }
 
 function has_rg() {
-    (command -v rg >/dev/null 2>&1) || return 1
+    hash rg 2>/dev/null || return 1
 }
 
 function has_clojure() {
-    (command -v clojure >/dev/null 2>&1) || return 1
+    hash clojure 2>/dev/null  || return 1
 }
 
 function has_tomcat() {
@@ -99,16 +99,24 @@ function has_systemd() {
   [[ -e /etc/systemd ]] || return 1
     }
 
+function has_oracledb() {
+  [[ -e /etc/profile.d/oracle_env.sh ]] || return 1
+    }
+
+function has_18xe() {
+  [[ ${ORACLE_HOME} =~ $XE18pattern ]] || return 1
+}
+
 function has_gpg_agent() {
-  (command -v gpg-connect-agent >/dev/null 2>&1)  || return 1
+  hash gpg-connect-agent 2>/dev/null   || return 1
     }
 
 function has_ssh_agent() {
-  (command -v ssh-agent >/dev/null 2>&1) || return 1
+  hash ssh-agent 2>/dev/null           || return 1
     }
 
 function has_app() {
-  for app in clojure docker gls gpg_agent java rg ssh_agent systemd tomcat; do
+  for app in clojure docker gls gpg_agent java rg ssh_agent systemd tomcat oracledb 18xe; do
     has_$app; [[ $? == ${1:-0} ]] && echo $app
   done
 }
