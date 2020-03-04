@@ -36,9 +36,11 @@ yellow="\e[1;33m";
 
 # Logging stuff.
 function e_header()   { echo -e "\n${bold}${cyan}$@${reset}"; }
-function e_success()  { echo -e " ${bold}${blue}✔${reset} $@"; }
+function e_success()  { echo -e " ${bold}${blue}✔ $@${reset}"; }
 function e_error()    { echo -e " ${bold}${red}✖  $@${reset}"; }
 function e_arrow()    { echo -e " ${bold}${yellow}➜${reset} $@"; }
+function e_info()     { echo -e " ${green}$@${reset}"; }
+function e_line()     { echo -e " ${yellow}$@${reset}"; }
 
 # For testing.
 function assert() {
