@@ -1,8 +1,8 @@
 # OSX-only stuff. Abort if not OSX.
 is_osx || return 1
 
-MY_OS=`uname -s`
-MY_MACHINE=`uname -p`
+MY_OS=$(uname -s)
+MY_MACHINE=$(uname -p)
 
 prepend_to_path_if_exists "$HOME/Documents/bin"
 prepend_to_path_if_exists "$HOME/bin"
