@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #set -o errexit
-set -o nounset
+#set -o nounset
 
 is_empty() {
     local var=$1

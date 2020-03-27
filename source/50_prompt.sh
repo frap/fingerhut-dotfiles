@@ -23,7 +23,8 @@
 # 33  43  yellow    37  47  white
 # get colours from gasbash-lib.sh
 
-if [[ ! "${prompt_colors[@]}" ]]; then
+if ! [ -z "${prompt_colors[@]:-}" ]
+then
   prompt_colors=(
     "36" # information color
     "37" # bracket color
@@ -32,19 +33,19 @@ if [[ ! "${prompt_colors[@]}" ]]; then
   );
 fi
 
- # Highlight the user name when logged in as root.
-if [[ "${USER}" == "root" ]]; then
+# Highlight the user name when logged in as root.
+if [ "${USER:-}" == "root" ]; then
 	userStyle="${_red}";
 else
 	userStyle="${_bold}${_purple}";
-fi;
+fi
 
 # Highlight the hostname when connected via SSH.
-if [[ "${SSH_TTY}" ]]; then
+if ! [ -z "${SSH_TTY:-}" ]; then
 	hostStyle="${_bold}${_orange}";
 else
 	hostStyle="${_cyan}";
-fi;
+fi
 
 
 # Inside a prompt function, run this alias to setup local $c0-$c9 color vars.
@@ -148,7 +149,7 @@ function prompt_command() {
   local exit_code=$?
   # If the first command in the stack is prompt_command, no command was run.
   # Set exit_code to 0 and reset the stack.
-p  [[ "${prompt_stack[0]}" == "prompt_command" ]] && exit_code=0
+  [[ "${prompt_stack[0]}" == "prompt_command" ]] && exit_code=0
   prompt_stack=()
 
   # Manually load z here, after $? is checked, to keep $? from being clobbered.
@@ -195,7 +196,7 @@ p  [[ "${prompt_stack[0]}" == "prompt_command" ]] && exit_code=0
   #PS1="$PS1$c3[\u@\h:\w]$c9"
   PS1+="\n";
   # date: [HH:MM:SS]
- # PS1+="$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9";
+  PS1+="$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9";
   # exit code: 127
   PS1+="$(prompt_exitcode "$exit_code")";
   PS1+="\[${_white}\]\$ \[${_reset}\]"; # `$` (and reset color)
