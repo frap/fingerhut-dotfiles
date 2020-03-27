@@ -160,7 +160,8 @@ function prompt_command() {
     PS1='\n$ ' && return
   fi
 
-  prompt_getcolors
+  # prompt_getcolors
+
   # http://twitter.com/cowboy/status/150254030654939137
   # Set the terminal title and prompt.
   PS1="\[\033]0;\W\007\]"; # working directory base name
@@ -169,7 +170,7 @@ function prompt_command() {
   PS1+="\[${_white}\]@";
   PS1+="\[${hostStyle}\]\h"; # host
   PS1+="\[${_white}\] in ";
-  PS1+="\[${_green}\]\w"; # working directory full path
+  PS1+="\[${_cyan}\]\w"; # working directory full path
 
   # I sometimes work on systems where a 'git status' command takes
   # several seconds to complete (while in the directory of a clone of
@@ -194,13 +195,13 @@ function prompt_command() {
   # path: [user@host:path]
   #PS1="$PS1$c1[$c0\u$c1@$c0\h$c1:$c0\w$c1]$c9"
   #PS1="$PS1$c3[\u@\h:\w]$c9"
-  PS1+="${_reset}\n";
+  #PS1+="${_reset}\n";
   # date: [HH:MM:SS]
-  PS1+="$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9";
+  #PS1+="$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9";
   # exit code: 127
-  PS1+="$(prompt_exitcode "$exit_code")";
+  #PS1+="$(prompt_exitcode "$exit_code")";
   PS1+="\[${_white}\]\$ \[${_reset}\]"; # `$` (and reset color)
- # PS1="$PS1 \$ "
+  PS1="$PS1 \$ "
 }
 
 PROMPT_COMMAND="prompt_command"
