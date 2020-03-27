@@ -75,7 +75,7 @@ set_logging () {
  function e_info()     { echo -e " ${_green}∴ $@${_reset}"; }
  function e_data()     { echo -e " ${_green}$@${_reset}"; }
  function e_line()     { echo -e " ${_orange}$@${_reset}"; }
- function e_question() { echo -e " ${_violet}$@${reset}"; }
+ function e_question() { echo -e " ${_violet}$@${_reset}"; }
 }
 
 # Check to see that a required environment variable is set.
