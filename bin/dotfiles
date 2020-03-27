@@ -6,41 +6,32 @@ if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 Usage: $(basename "$0")
 
 See the README for documentation.
-https://github.com/cowboy/dotfiles
+https://github.com/frap/atea-dotfiles
 
-Copyright (c) 2014 "Cowboy" Ben Alman
+Copyright (c) 2020 "Gas" Andrés Gasson
 Licensed under the MIT license.
-http://benalman.com/about/license/
+http://github.io/frap/about/license
 HELP
 exit; fi
 
 ###########################################
 # GENERAL PURPOSE EXPORTED VARS / FUNCTIONS
 ###########################################
+SOURCE="${BASH_SOURCE[0]}"
+# resolve $SOURCE until the file is no longer a symlink
+while [ -h "$SOURCE" ]; do
+    DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    # if $SOURCE was a relative symlink, we need to resolve it relative
+    # to the path where the symlink file was located
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+__dir="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # Where the magic happens.
 export DOTFILES=~/.local/dotfiles
 
-bold='';
-reset="\e[0m";
-black="\e[1;30m";
-blue="\e[1;34m";
-cyan="\e[1;36m";
-green="\e[1;32m";
-orange="\e[1;33m";
-purple="\e[1;35m";
-red="\e[1;31m";
-violet="\e[1;35m";
-white="\e[1;37m";
-yellow="\e[1;33m";
-
-# Logging stuff.
-function e_header()   { echo -e "\n${bold}${cyan}$@${reset}"; }
-function e_success()  { echo -e " ${bold}${blue}✔ $@${reset}"; }
-function e_error()    { echo -e " ${bold}${red}✖  $@${reset}"; }
-function e_arrow()    { echo -e " ${bold}${yellow}➜${reset} $@"; }
-function e_info()     { echo -e " ${green}$@${reset}"; }
-function e_line()     { echo -e " ${yellow}$@${reset}"; }
+source ${__dir}/gasbash-lib.sh
 
 # For testing.
 function assert() {
@@ -240,7 +231,7 @@ function setdiff() {
 ###########################################
 # INTERNAL DOTFILES "INIT" VARS / FUNCTIONS
 ###########################################
-e_header 'Dotfiles - "Gas" Andrés Gasson - http://frap.github.io/';
+e_header 'Dotfiles - "Gas" Andrés Gasson - http://frap.github.io/atea-dotfiles';
 # Initialise.
 init_file=$DOTFILES/caches/init/selected
 function init_files() {

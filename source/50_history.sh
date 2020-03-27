@@ -7,7 +7,7 @@ shopt -s lithist
 shopt -s histappend
 
 
-# Allow use to re-edit a faild history substitution.
+# Allow use to re-edit a failed history substitution.
 shopt -s histreedit
 # History expansions will be verified before execution.
 shopt -s histverify

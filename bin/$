@@ -5,5 +5,5 @@
 
 # Begone, silly errors! Lazy copy + paste forever!! ETCETERA!!!!
 
-echo "Arrête de coller dans les commandes de l'internet, espèce de fainéant."
+e_error "Arrête de coller dans les commandes de l'internet, espèce de fainéant."
 "$@"

@@ -21,37 +21,7 @@
 # 31  41  red       35  45  magenta
 # 32  42  green     36  46  cyan
 # 33  43  yellow    37  47  white
-#
-if tput setaf 1 &> /dev/null; then
-	tput sgr0; # reset colors
-	bold=$(tput bold);
-	reset=$(tput sgr0);
-	# Solarized colors, taken from http://git.io/solarized-colors.
-	black=$(tput setaf 0);
-	blue=$(tput setaf 33);
-	cyan=$(tput setaf 37);
-	green=$(tput setaf 64);
-	orange=$(tput setaf 166);
-	purple=$(tput setaf 125);
-	red=$(tput setaf 124);
-	violet=$(tput setaf 61);
-	white=$(tput setaf 15);
-	yellow=$(tput setaf 136);
-else
-	bold='';
-	reset="\e[0m";
-	black="\e[1;30m";
-	blue="\e[1;34m";
-	cyan="\e[1;36m";
-	green="\e[1;32m";
-	orange="\e[1;33m";
-	purple="\e[1;35m";
-	red="\e[1;31m";
-	violet="\e[1;35m";
-	white="\e[1;37m";
-	yellow="\e[1;33m";
-fi;
-
+# get colours from gasbash-lib.sh
 
 if [[ ! "${prompt_colors[@]}" ]]; then
   prompt_colors=(
@@ -64,16 +34,16 @@ fi
 
  # Highlight the user name when logged in as root.
 if [[ "${USER}" == "root" ]]; then
-	userStyle="${red}";
+	userStyle="${_red}";
 else
-	userStyle="${bold}${purple}";
+	userStyle="${_bold}${_purple}";
 fi;
 
 # Highlight the hostname when connected via SSH.
 if [[ "${SSH_TTY}" ]]; then
-	hostStyle="${bold}${orange}";
+	hostStyle="${_bold}${_orange}";
 else
-	hostStyle="${cyan}";
+	hostStyle="${_cyan}";
 fi;
 
 
@@ -83,7 +53,7 @@ alias prompt_getcolors='prompt_colors[9]=; local i; for i in ${!prompt_colors[@]
 # Exit code of previous command.
 function prompt_exitcode() {
   prompt_getcolors
-  [[ $1 != 0 ]] && echo " ${red}erreur: $1${reset}\n"
+  [[ $1 != 0 ]] && e_error " erreur: $1\n"
 }
 
 # Git status.
@@ -168,12 +138,10 @@ trap 'prompt_stack=("${prompt_stack[@]}" "$BASH_COMMAND")' DEBUG
 
 prompt_enable_vcs_info=1
 prompt_program_installed_git=0
-if [ `which git >& /dev/null` ]
+if [ $(command -v git >& /dev/null) ]
 then
     prompt_program_installed_git=1
 fi
-
-
 
 
 function prompt_command() {
@@ -187,18 +155,20 @@ function prompt_command() {
   [[ "$(type -t _z)" ]] && _z --add "$(pwd -P 2>/dev/null)" 2>/dev/null
 
   # While the simple_prompt environment var is set, disable the awesome prompt.
-  [[ "$simple_prompt" ]] && PS1='\n$ ' && return
+  if ! [[ -z "${simple_prompt:-}" ]]; then
+    PS1='\n$ ' && return
+  fi
 
   prompt_getcolors
   # http://twitter.com/cowboy/status/150254030654939137
   # Set the terminal title and prompt.
   PS1="\[\033]0;\W\007\]"; # working directory base name
-  PS1+="\[${bold}\]\n"; # newline
+  PS1+="\[${_bold}\]\n"; # newline
   PS1+="\[${userStyle}\]\u"; # username
-  PS1+="\[${white}\]@";
+  PS1+="\[${_white}\]@";
   PS1+="\[${hostStyle}\]\h"; # host
-  PS1+="\[${white}\] in ";
-  PS1+="\[${green}\]\w"; # working directory full path
+  PS1+="\[${_white}\] in ";
+  PS1+="\[${_green}\]\w"; # working directory full path
 
   # I sometimes work on systems where a 'git status' command takes
   # several seconds to complete (while in the directory of a clone of
@@ -215,7 +185,7 @@ function prompt_command() {
  #     if [ $prompt_program_installed_git == 1 ]
  #     then
 #	  # git: [branch:flags]
-	     PS1+="\$(prompt_git \"\[${white}\] with \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+	     PS1+="\$(prompt_git \"\[${_white}\] with \[${_violet}\]\" \"\[${_blue}\]\")"; # Git repository details
  #     fi
 #  fi
   # misc: [cmd#:hist#]
@@ -228,12 +198,12 @@ function prompt_command() {
   PS1+="$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9";
   # exit code: 127
   PS1+="$(prompt_exitcode "$exit_code")";
-  PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
+  PS1+="\[${_white}\]\$ \[${_reset}\]"; # `$` (and reset color)
  # PS1="$PS1 \$ "
 }
 
 PROMPT_COMMAND="prompt_command"
 
 
-PS2="\[${yellow}\]→ \[${reset}\]";
+PS2="\[${_yellow}\]→ \[${_reset}\]";
 export PS2;
