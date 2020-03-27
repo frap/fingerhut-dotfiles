@@ -148,7 +148,7 @@ function prompt_command() {
   local exit_code=$?
   # If the first command in the stack is prompt_command, no command was run.
   # Set exit_code to 0 and reset the stack.
-  [[ "${prompt_stack[0]}" == "prompt_command" ]] && exit_code=0
+p  [[ "${prompt_stack[0]}" == "prompt_command" ]] && exit_code=0
   prompt_stack=()
 
   # Manually load z here, after $? is checked, to keep $? from being clobbered.
@@ -195,7 +195,7 @@ function prompt_command() {
   #PS1="$PS1$c3[\u@\h:\w]$c9"
   PS1+="\n";
   # date: [HH:MM:SS]
-  PS1+="$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9";
+ # PS1+="$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9";
   # exit code: 127
   PS1+="$(prompt_exitcode "$exit_code")";
   PS1+="\[${_white}\]\$ \[${_reset}\]"; # `$` (and reset color)
