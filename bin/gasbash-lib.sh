@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -o errexit
+#set -o errexit
 set -o nounset
 
 is_empty() {
