@@ -115,8 +115,8 @@ function ctrl_c() {
 }
 
 
-function main() {
+#function main() {
 #    set_logging
-}
+#}
 
-main
+#main
