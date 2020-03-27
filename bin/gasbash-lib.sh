@@ -53,7 +53,7 @@ matches_regex() {
 }
 
 # colourful logging capabilities
-set_logging () {
+#set_logging () {
  readonly _bold='';
  readonly _reset="\e[0m";
  readonly _black="\e[1;30m";
@@ -76,7 +76,7 @@ set_logging () {
  function e_data()     { echo -e " ${_green}$@${_reset}"; }
  function e_line()     { echo -e " ${_orange}$@${_reset}"; }
  function e_question() { echo -e " ${_violet}$@${_reset}"; }
-}
+#}
 
 # Check to see that a required environment variable is set.
 # Use it without the $, as in:
@@ -116,7 +116,7 @@ function ctrl_c() {
 
 
 function main() {
-    set_logging
+#    set_logging
 }
 
 main
