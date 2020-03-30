@@ -37,14 +37,14 @@ fi
 if [ "${USER:-}" == "root" ]; then
 	userStyle="${_red}";
 else
-	userStyle="${_bold}${_purple}";
+	userStyle="${_bold}${_blue}";
 fi
 
 # Highlight the hostname when connected via SSH.
 if ! [ -z "${SSH_TTY:-}" ]; then
 	hostStyle="${_bold}${_orange}";
 else
-	hostStyle="${_cyan}";
+	hostStyle="${_green}";
 fi
 
 
@@ -55,53 +55,53 @@ function prompt_exitcode() {
 }
 
 function prompt_git() {
-	local s='';
-	local branchName='';
+    local s='';
+    local branchName='';
 
-	# Check if the current directory is in a Git repository.
-	if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
+    # Check if the current directory is in a Git repository.
+    if [ $(git rev-parse --is-inside-work-tree &>/dev/null; echo "${?}") == '0' ]; then
 
-		# check if the current directory is in .git before running git checks
-		if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
+	# check if the current directory is in .git before running git checks
+	if [ "$(git rev-parse --is-inside-git-dir 2> /dev/null)" == 'false' ]; then
 
-			# Ensure the index is up to date.
-			git update-index --really-refresh -q &>/dev/null;
+	    # Ensure the index is up to date.
+	    git update-index --really-refresh -q &>/dev/null;
 
-			# Check for uncommitted changes in the index.
-			if ! $(git diff --quiet --ignore-submodules --cached); then
-				s+='+';
-			fi;
+	    # Check for uncommitted changes in the index.
+	    if ! $(git diff --quiet --ignore-submodules --cached); then
+		s+='+';
+	    fi;
 
-			# Check for unstaged changes.
-			if ! $(git diff-files --quiet --ignore-submodules --); then
-				s+='!';
-			fi;
+	    # Check for unstaged changes.
+	    if ! $(git diff-files --quiet --ignore-submodules --); then
+		s+='!';
+	    fi;
 
-			# Check for untracked files.
-			if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-				s+='?';
-			fi;
+	    # Check for untracked files.
+	    if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+		s+='?';
+	    fi;
 
-			# Check for stashed files.
-			if $(git rev-parse --verify refs/stash &>/dev/null); then
-				s+='$';
-			fi;
+	    # Check for stashed files.
+	    if $(git rev-parse --verify refs/stash &>/dev/null); then
+		s+='$';
+	    fi;
 
-		fi;
+	fi;
 
-		# Get the short symbolic ref.
-		# If HEAD isn’t a symbolic ref, get the short SHA for the latest commit
-		# Otherwise, just give up.
-		branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
+	# Get the short symbolic ref.
+	# If HEAD isn’t a symbolic ref, get the short SHA for the latest commit
+	# Otherwise, just give up.
+	branchName="$(git symbolic-ref --quiet --short HEAD 2> /dev/null || \
 			git rev-parse --short HEAD 2> /dev/null || \
 			echo '(unknown)')";
 
-		[ -n "${s}" ] && s=" [${s}]";
+	[ -n "${s}" ] && s=" [${s}]";
 
-		echo -e "${1}${branchName}${2}${s}";
-	else
-		return;
-	fi;
+	echo -e "${1}${branchName}${2}${s}";
+    else
+	return;
+    fi;
 }
 
 
@@ -136,7 +136,7 @@ function prompt_command() {
   # Set the terminal title and prompt.
 
   PS1="\[\033]0;\W\007\]"; # working directory base name
-  PS1+="${_yellow}$(date +"%H${_white}:${_yellow}%M${_white}:${_yellow}%S")${_white} →${_reset}";
+  #PS1+="${_yellow}$(date +"%H${_white}:${_yellow}%M${_white}:${_yellow}%S")${_white} →${_reset}";
   PS1+="\[${_bold}\]\n"; # newline
   PS1+="\[${userStyle}\]\u"; # username
   PS1+="\[${_white}\]@";
@@ -171,9 +171,10 @@ function prompt_command() {
   # date: [HH:MM:SS]
 
   # exit code: 127
-  PS1+="$(prompt_exitcode "$exit_code")";
-  PS1+="\[${_cyan}\]\$ \[${_reset}\]"; # `$` (and reset color)
+  #PS1+="$(prompt_exitcode "$exit_code")";
+  PS1+="\[${_cyan}\]→\$ \[${_reset}\]"; # `$` (and reset color)
   #PS1="$PS1 \$ "
+
 }
 
 PROMPT_COMMAND="prompt_command"
