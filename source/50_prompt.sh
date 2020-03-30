@@ -48,38 +48,10 @@ else
 fi
 
 
-# Inside a prompt function, run this alias to setup local $c0-$c9 color vars.
-alias prompt_getcolors='prompt_colors[9]=; local i; for i in ${!prompt_colors[@]}; do local c$i="\[\e[0;${prompt_colors[$i]}m\]"; done'
-
 # Exit code of previous command.
 function prompt_exitcode() {
   #prompt_getcolors
-  [[ $1 != 0 ]] && e_error " erreur: $1\n"
-}
-
-# Git status.
-function prompt_git_old() {
-  prompt_getcolors
-  local status output flags branch
-  # For large git repositories, especially on NFS mounted file
-  # systems, 'git status' is much slower than 'git status -uno', and
-  # the latter also gives all of the output used by this function.
-  status="$(git status -uno 2>/dev/null)"
-  [[ $? != 0 ]] && return;
-  output="$(echo "$status" | awk '/# Initial commit/ {print "(init)"}')"
-  [[ "$output" ]] || output="$(echo "$status" | awk '/# On branch/ {print $4}')"
-  [[ "$output" ]] || output="$(git branch | perl -ne '/^\* \(detached from (.*)\)$/ ? print "($1)" : /^\* (.*)/ && print $1')"
-  flags="$(
-    echo "$status" | awk 'BEGIN {r=""} \
-        /^(# )?Changes to be committed:$/        {r=r "+"}\
-        /^(# )?Changes not staged for commit:$/  {r=r "!"}\
-        /^(# )?Untracked files:$/                {r=r "?"}\
-      END {print r}'
-  )"
-  if [[ "$flags" ]]; then
-    output="$output$c1:$c0$flags"
-  fi
-  echo "$c1[$c0$output$c1]$c9"
+  [[ $1 != 0 ]] && e_error "last exit-code=$1 "
 }
 
 function prompt_git() {
@@ -139,7 +111,7 @@ trap 'prompt_stack=("${prompt_stack[@]}" "$BASH_COMMAND")' DEBUG
 
 prompt_enable_vcs_info=1
 prompt_program_installed_git=0
-if [ $(command -v git >& /dev/null) ]
+if [[ $(command -v git >& /dev/null) ]]
 then
     prompt_program_installed_git=1
 fi
@@ -160,11 +132,11 @@ function prompt_command() {
     PS1='\n$ ' && return
   fi
 
-  prompt_getcolors
-
   # http://twitter.com/cowboy/status/150254030654939137
   # Set the terminal title and prompt.
+
   PS1="\[\033]0;\W\007\]"; # working directory base name
+  PS1+="${_yellow}$(date +"%H${_white}:${_yellow}%M${_white}:${_yellow}%S")${_white} →${_reset}";
   PS1+="\[${_bold}\]\n"; # newline
   PS1+="\[${userStyle}\]\u"; # username
   PS1+="\[${_white}\]@";
@@ -197,10 +169,10 @@ function prompt_command() {
   #PS1="$PS1$c3[\u@\h:\w]$c9"
   #PS1+="${_reset}\n";
   # date: [HH:MM:SS]
-  PS1+="$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9";
+
   # exit code: 127
   PS1+="$(prompt_exitcode "$exit_code")";
-  PS1+="\[${_green}\]\$ \[${_reset}\]"; # `$` (and reset color)
+  PS1+="\[${_cyan}\]\$ \[${_reset}\]"; # `$` (and reset color)
   #PS1="$PS1 \$ "
 }
 
