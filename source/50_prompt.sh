@@ -51,7 +51,7 @@ fi
 # Exit code of previous command.
 function prompt_exitcode() {
   #prompt_getcolors
-  [[ $1 != 0 ]] && e_error "last exit-code=$1 "
+  [[ $1 != 0 ]] && e_error "Erreur: last exit-code=$1 "
 }
 
 function prompt_git() {
@@ -136,13 +136,12 @@ function prompt_command() {
   # Set the terminal title and prompt.
 
   PS1="\[\033]0;\W\007\]"; # working directory base name
-  #PS1+="${_yellow}$(date +"%H${_white}:${_yellow}%M${_white}:${_yellow}%S")${_white} →${_reset}";
   PS1+="\[${_bold}\]\n"; # newline
   PS1+="\[${userStyle}\]\u"; # username
   PS1+="\[${_white}\]@";
   PS1+="\[${hostStyle}\]\h"; # host
   PS1+="\[${_white}\] in ";
-  PS1+="\[${_yellow}\]\w"; # working directory full path
+  PS1+="\[${_cyan}\]\w"; # working directory full path
 
   # I sometimes work on systems where a 'git status' command takes
   # several seconds to complete (while in the directory of a clone of
@@ -167,12 +166,12 @@ function prompt_command() {
   # path: [user@host:path]
   #PS1="$PS1$c1[$c0\u$c1@$c0\h$c1:$c0\w$c1]$c9"
   #PS1="$PS1$c3[\u@\h:\w]$c9"
-  #PS1+="${_reset}\n";
-  # date: [HH:MM:SS]
-
   # exit code: 127
-  #PS1+="$(prompt_exitcode "$exit_code")";
-  PS1+="\[${_cyan}\]→\$ \[${_reset}\]"; # `$` (and reset color)
+  PS1+="$(prompt_exitcode "$exit_code")";
+  PS1+="${_reset}\n";
+  # date: [HH:MM:SS]
+  PS1+="${_cyan}$(date +"%H${_white}:${_cyan}%M${_white}:${_cyan}%S")${_white} ";
+  PS1+="\[${_bold}\]\[${_purple}\]→ \$ \[${_reset}\]"; # `$` (and reset color)
   #PS1="$PS1 \$ "
 
 }

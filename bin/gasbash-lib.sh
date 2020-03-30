@@ -56,6 +56,8 @@ matches_regex() {
 #set_logging () {
  readonly _bold='';
  readonly _reset="\e[0m";
+ readonly _uline="\e[4m";
+ readonly _inverse="\e[7m";
  readonly _black="\e[1;30m";
  readonly _blue="\e[1;34m";
  readonly _cyan="\e[1;36m";
