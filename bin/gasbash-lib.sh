@@ -81,12 +81,12 @@ matches_regex() {
  function flasher ()   { while true; do printf \\e[?5h; sleep 0.1; printf \\e[?5l; read -s -n1 -t1 && break; done; }
 #}
 # For testing.
- function assert() {
-   local success modes equals actual expected
-   modes=(e_error e_success); equals=("!=" "=="); expected="$1"; shift
-   actual="$("$@")"
-   [[ "$actual" == "$expected" ]] && success=1 || success=0
-   ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\"" }
+# function assert() {
+#   local success modes equals actual expected
+#   modes=(e_error e_success); equals=("!=" "=="); expected="$1"; shift
+#   actual="$("$@")"
+#   [[ "$actual" == "$expected" ]] && success=1 || success=0
+#   ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\"" }
 
 # Check to see that a required environment variable is set.
 # Use it without the $, as in:
