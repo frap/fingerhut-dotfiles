@@ -54,6 +54,24 @@ matches_regex() {
 
 # colourful logging capabilities
 #set_logging () {
+if tput setaf 1 &> /dev/null; then
+	tput sgr0; # reset colors
+	_bold=$(tput bold);
+	_reset=$(tput sgr0);
+	# Solarized colors, taken from http://git.io/solarized-colors.
+  _uline=$(tput setaf 4);
+  _inverse=$(tput setaf 7);
+	_black=$(tput setaf 0);
+	_blue=$(tput setaf 33);
+	_cyan=$(tput setaf 37);
+	_green=$(tput setaf 64);
+	_orange=$(tput setaf 166);
+	_purple=$(tput setaf 125);
+	_red=$(tput setaf 124);
+	_violet=$(tput setaf 61);
+	_white=$(tput setaf 15);
+	_yellow=$(tput setaf 136);
+else
  readonly _bold='';
  readonly _reset="\e[0m";
  readonly _uline="\e[4m";
@@ -68,7 +86,7 @@ matches_regex() {
  readonly _violet="\e[1;35m";
  readonly _white="\e[1;37m";
  readonly _yellow="\e[1;33m";
-
+fi;
  # Logging stuff.
  function e_header()   { echo -e "\n${_bold}${_purple}$@${_reset}"; }
  function e_success()  { echo -e " ${_bold}${_cyan}✔ $@${_reset}"; }

@@ -11,9 +11,6 @@ function src() {
   if [[ "$1" ]]; then
     source "$DOTFILES/source/$1.sh"
   else
-      if [[ ! -z ${_bold} ]]; then
-          source gasbash-lib.sh
-      fi
       for file in $DOTFILES/source/*; do
           source "$file"
       done
