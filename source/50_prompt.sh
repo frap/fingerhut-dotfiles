@@ -37,12 +37,12 @@ fi
 if [ "${USER:-}" == "root" ]; then
 	userStyle="${_red}";
 else
-	userStyle="${_bold}${_blue}";
+	userStyle="${_bold}${_cyan}";
 fi
 
 # Highlight the hostname when connected via SSH.
 if ! [ -z "${SSH_TTY:-}" ]; then
-	hostStyle="${_bold}${_orange}";
+	hostStyle="${_bold}${_uline}${_orange}";
 else
 	hostStyle="${_green}";
 fi
@@ -158,7 +158,7 @@ function prompt_command() {
  #     if [ $prompt_program_installed_git == 1 ]
  #     then
 #	  # git: [branch:flags]
-	     PS1+="\$(prompt_git \"\[${_white}\] with \[${_violet}\]\" \"\[${_blue}\]\")"; # Git repository details
+	     PS1+="\$(prompt_git \"\[${_white}\] with \[${_yellow}\]\" \"\[${_purple}\]\")"; # Git repository details
  #     fi
 #  fi
   # misc: [cmd#:hist#]
