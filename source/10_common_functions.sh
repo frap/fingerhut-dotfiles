@@ -16,20 +16,20 @@ if tput setaf 1 &> /dev/null; then
 	_white=$(tput setaf 15);
 	_yellow=$(tput setaf 136);
 else
- readonly _bold='';
- readonly _reset="\e[0m";
- readonly _uline="\e[4m";
- readonly _inverse="\e[7m";
- readonly _black="\e[1;30m";
- readonly _blue="\e[1;34m";
- readonly _cyan="\e[1;36m";
- readonly _green="\e[1;32m";
- readonly _orange="\e[1;33m";
- readonly _purple="\e[1;35m";
- readonly _red="\e[1;31m";
- readonly _violet="\e[1;35m";
- readonly _white="\e[1;37m";
- readonly _yellow="\e[1;33m";
+  _bold='';
+  _reset="\e[0m";
+  _uline="\e[4m";
+  _inverse="\e[7m";
+  _black="\e[1;30m";
+  _blue="\e[1;34m";
+  _cyan="\e[1;36m";
+  _green="\e[1;32m";
+  _orange="\e[1;33m";
+  _purple="\e[1;35m";
+  _red="\e[1;31m";
+  _violet="\e[1;35m";
+  _white="\e[1;37m";
+  _yellow="\e[1;33m";
 fi;
  # Logging stuff.
  function e_header()   { echo -e "\n${_bold}${_purple}$@${_reset}"; }
