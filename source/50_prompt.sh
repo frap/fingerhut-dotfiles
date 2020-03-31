@@ -139,7 +139,7 @@ function prompt_command() {
   PS1+="\[${_bold}\]\n"; # newline
   PS1+="\[${userStyle}\]\u"; # username
   PS1+="\[${_white}\]@";
-  PS1+="\[${hostStyle}\]\h"; # host
+  PS1+="\[${hostStyle}\]\h\[${_reset}\]"; # host
   PS1+="\[${_white}\] in ";
   PS1+="\[${_cyan}\]\w"; # working directory full path
 
