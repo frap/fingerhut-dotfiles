@@ -33,9 +33,9 @@ if [[ "$(type -P tree)" ]]; then
 fi
 
 # Easier navigation: .., ..., -
-alias ..='cd ..'
-alias ...='cd ../..'
-alias -- -='cd -'
+#alias ..='cd ..'
+#alias ...='cd ../..'
+#alias -- -='cd -'
 
 
 # Long listing of only the most recently updated files
