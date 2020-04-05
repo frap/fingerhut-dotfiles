@@ -134,7 +134,7 @@ function prompt_command() {
   # Set the terminal title and prompt.
 
   #PS1="\[\033]0;\W\007\]"; # working directory base name
-  PS1="${_white}[\$(prompt_git \"\[${_yellow}\]\" \"\[${_purple}\]\")$_white}]"; # Git repository details
+  PS1="${_white}[\$(prompt_git \"\[${_yellow}\]\" \"\[${_purple}\]\")${_white}]"; # Git repository details
   PS1+="${_bold}${_white}["; # \n newline
   PS1+="\[${userStyle}\]\u"; # username
   PS1+="\[${_white}\]@";
