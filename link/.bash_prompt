@@ -8,8 +8,6 @@
 # [master:!?][cowboy@CowBook:~/.dotfiles]
 # [11:14:45] $
 #
-# Read more (and see a screenshot) in the "Prompt" section of
-# https://github.com/cowboy/dotfiles
 
 # ANSI CODES - SEPARATE MULTIPLE VALUES WITH ;
 #
@@ -135,13 +133,14 @@ function prompt_command() {
   # http://twitter.com/cowboy/status/150254030654939137
   # Set the terminal title and prompt.
 
-  PS1="\[\033]0;\W\007\]"; # working directory base name
-  PS1+="\[${_bold}\]\n"; # newline
+  #PS1="\[\033]0;\W\007\]"; # working directory base name
+  PS1="${_white}[\$(prompt_git \"\[${_yellow}\]\" \"\[${_purple}\]\")$_white}]"; # Git repository details
+  PS1+="${_bold}${_white}["; # \n newline
   PS1+="\[${userStyle}\]\u"; # username
   PS1+="\[${_white}\]@";
   PS1+="\[${hostStyle}\]\h\[${_reset}\]"; # host
-  PS1+="\[${_white}\] in ";
-  PS1+="\[${_cyan}\]\w"; # working directory full path
+  PS1+="\[${_white}\]:";  # use to be dans
+  PS1+="\[${_cyan}\]\w"${_white}]; # working directory full path
 
   # I sometimes work on systems where a 'git status' command takes
   # several seconds to complete (while in the directory of a clone of
@@ -158,7 +157,7 @@ function prompt_command() {
  #     if [ $prompt_program_installed_git == 1 ]
  #     then
 #	  # git: [branch:flags]
-	     PS1+="\$(prompt_git \"\[${_white}\] with \[${_yellow}\]\" \"\[${_purple}\]\")"; # Git repository details
+#	     PS1+="${_white}[\$(prompt_git \"\[${_yellow}\]\" \"\[${_purple}\]\")$_white}]"; # Git repository details
  #     fi
 #  fi
   # misc: [cmd#:hist#]
@@ -170,8 +169,8 @@ function prompt_command() {
   PS1+="$(prompt_exitcode "$exit_code")";
   PS1+="${_reset}\n";
   # date: [HH:MM:SS]
-  PS1+="${_cyan}$(date +"%H${_white}:${_cyan}%M${_white}:${_cyan}%S")${_white} ";
-  PS1+="\[${_bold}\]\[${_purple}\]→ \$ \[${_reset}\]"; # `$` (and reset color)
+  PS1+="${_white}[${_cyan}$(date +"%H${_white}:${_cyan}%M${_white}:${_cyan}%S")${_white}]";
+  PS1+="\[${_purple}\] \$ \[${_reset}\]"; # `$` (and reset color)
   #PS1="$PS1 \$ "
 
 }
@@ -181,3 +180,4 @@ PROMPT_COMMAND="prompt_command"
 
 PS2="\[${_yellow}\]→ \[${_reset}\]";
 export PS2;
+export PS4='$0.$LINENO+ '
