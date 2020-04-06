@@ -63,6 +63,7 @@ check_apex_ver() {
     local sql="$sqldir/sql"
     local host=$(hostname -s)
     is_file $oracle_env && source $oracle_env
+    SID="${SID:-}"
     if is_not_dir $sqldir; then
         sql="${ORACLE_HOME}/bin/sqlplus"
     fi
