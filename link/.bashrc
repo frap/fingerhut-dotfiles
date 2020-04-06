@@ -15,6 +15,16 @@ function src() {
           source "$file"
       done
   fi
+  #load up the bash_prompt - do it here as emacs tramp gets fucked up with
+  #non > prompts
+  case "$TERM" in
+        "dumb")
+            export PS1="> "
+            ;;
+        xterm*|rxvt*|eterm*|screen*)
+            tty -s && source ~/.bash_prompt
+            ;;
+  esac
 }
 
 # Run dotfiles script, then source.

@@ -33,15 +33,6 @@ export DOTFILES=~/.local/dotfiles
 
 source ${__dir}/gasbash-lib.sh
 
-# For testing.
-function assert() {
-  local success modes equals actual expected
-  modes=(e_error e_success); equals=("!=" "=="); expected="$1"; shift
-  actual="$("$@")"
-  [[ "$actual" == "$expected" ]] && success=1 || success=0
-  ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\""
-}
-
 # OS detection
 function is_osx() {
   [[ "$OSTYPE" =~ ^darwin ]] || return 1
