@@ -25,7 +25,7 @@ check_oracledb() {
     local XE11pattern='11.2.0/xe'
     local XE18pattern='18c'
     local oracle_env=/etc/profile.d/oracle_env.sh
-    SID=""
+    SID="${SID:-}"
     local oracle_db=""
 
     if is_file $oracle_env; then
@@ -63,7 +63,7 @@ check_apex_ver() {
     local sql="$sqldir/sql"
     local host=$(hostname -s)
     is_file $oracle_env && source $oracle_env
-    if not_is_dir $sqldir; then
+    if is_not_dir $sqldir; then
         sql="${ORACLE_HOME}/bin/sqlplus"
     fi
     local apex_ver=""
