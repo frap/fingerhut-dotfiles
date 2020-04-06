@@ -114,7 +114,7 @@ read_oracle_sys_passwd() {
 }
 
 check() {
-    set_logging
+#    set_logging
     olinux_ver=$(check_oraclelinux_ver)
     tomcat_ver=$(check_tomcat_ver)
     oracle_db=$(check_oracledb)
