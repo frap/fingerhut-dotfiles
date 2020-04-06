@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -n $(dirname $0))
+readonly ARGS="$@"
+#Figure out where the script is running
+readonly __SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)"
+
+LS=ls
+export logfile=/tmp/AteaTSP-versions.log
+# Redirect stderr
+exec 2>&1
+# Redirect stdout ( > ) into a named pipe ( >() ) running "tee"
+exec > >(tee -i $logfile)
+
+
+cmdline="${1:-check}"
+
+# Include the robust-bash functions
+source "$__SCRIPT_DIR"/gasbash-lib.sh
+
+check_oracledb() {
+    local XE11pattern='11.2.0/xe'
+    local XE18pattern='18c'
+    local oracle_env=/etc/profile.d/oracle_env.sh
+    SID=""
+    local oracle_db=""
+
+    if is_file $oracle_env; then
+        source $oracle_env
+        if matches_regex ${ORACLE_HOME} ${XE18pattern} ; then
+            SID="xepdb1";
+            oracle_db="18.4 XE";
+        else
+            SID='XE';
+            oracle_db="11.2 XE"
+        fi
+        echo $oracle_db
+
+    else
+        e_error "No oracle DB installed"
+    fi
+
+}
+
+check_tomcat_ver() {
+    local dir=/opt/tomcat_latest
+
+    if is_link $dir  ; then
+        tomcat_ver=$($LS -las $dir | cut -d'>' -f2 | cut -d'-' -f3)
+    else
+        e_error "No tomcat directory $dir"
+        tomcat_ver="n/a"
+    fi
+    echo $tomcat_ver
+}
+
+check_apex_ver() {
+    local oracle_env=/etc/profile.d/oracle_env.sh
+    local sqldir="/opt/sql/bin"
+    local sql="$sqldir/sql"
+    local host=$(hostname -s)
+    is_file $oracle_env && source $oracle_env
+    if not_is_dir $sqldir; then
+        sql="${ORACLE_HOME}/bin/sqlplus"
+    fi
+    local apex_ver=""
+
+    apex_ver=$(echo -n | echo "SELECT comp_name, version, status FROM dba_registry WHERE comp_id='APEX';" \
+        | $sql sys/${syspwd}@${host}:1521/${SID} as sysdba \
+        | grep "VALID" | cut -d" " -f1 )
+    echo $apex_ver
+}
+
+check_ords_ver() {
+    local ords_jar="/opt/tomcat_latest/webapps/apex.war"
+
+    if file_exists $ords_jar; then
+        ords_ver=$(sudo java -jar $ords_jar version | cut -d" " -f5)
+    else
+        ords_ver="n/a"
+    fi
+    echo $ords_ver
+}
+
+check_oraclelinux_ver() {
+    local oracle_rel=/etc/oracle-release
+    local linux_ver=""
+
+    if is_file $oracle_rel; then
+        linux_ver=$(cat $oracle_rel | cut -d" " -f5)
+        echo $linux_ver
+    else
+        e_error "Not an Oracle linux TSP Numb nuts!"
+    fi
+
+}
+
+read_oracle_sys_passwd() {
+    if matches_regex $oracle_db "No oracle DB install"; then
+        e_error "No oracle DB installed -> no sys password!"
+    else
+        echo ""
+        e_line "###############################################"
+        e_arrow " Please provide the Oracle DB SYS password ##"
+        e_line "###############################################"
+        read -s syspwd
+        export syspwd
+        clear
+    fi
+
+}
+
+check() {
+    set_logging
+    olinux_ver=$(check_oraclelinux_ver)
+    tomcat_ver=$(check_tomcat_ver)
+    oracle_db=$(check_oracledb)
+    read_oracle_sys_passwd
+    apex_ver=$(check_apex_ver)
+    ords_ver=$(check_ords_ver)
+    e_line "------------------------------------------------------"
+    e_arrow "Oracle Linux version    : $olinux_ver"
+    e_arrow "Tomcat version          : $tomcat_ver"
+    e_arrow "Oracle Database version : $oracle_db"
+    e_arrow "Oracle APEX version     : $apex_ver"
+    e_arrow "Oracle ORDs version     : $ords_ver"
+    e_line "------------------------------------------------------"
+}
+
+
+$cmdline
