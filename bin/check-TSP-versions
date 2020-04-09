@@ -9,19 +9,21 @@ readonly ARGS="$@"
 readonly __SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)"
 
 LS=ls
-export logfile=/tmp/AteaTSP-versions.log
+
+function set_logging() {
+export logfile=/tmp/$PROGNAME.log
 # Redirect stderr
 exec 2>&1
 # Redirect stdout ( > ) into a named pipe ( >() ) running "tee"
 exec > >(tee -i $logfile)
-
+}
 
 cmdline="${1:-check}"
 
 # Include the robust-bash functions
 source "$__SCRIPT_DIR"/gasbash-lib.sh
 
-check_oracledb() {
+get_oracledb_ver() {
     local XE11pattern='11.2.0/xe'
     local XE18pattern='18c'
     local oracle_env=/etc/profile.d/oracle_env.sh
@@ -45,19 +47,19 @@ check_oracledb() {
 
 }
 
-check_tomcat_ver() {
+get_tomcat_ver() {
     local dir=/opt/tomcat_latest
 
     if is_link $dir  ; then
         tomcat_ver=$($LS -las $dir | cut -d'>' -f2 | cut -d'-' -f3)
     else
-        e_error "No tomcat directory $dir"
+        ## "No tomcat directory $dir"
         tomcat_ver="n/a"
     fi
     echo $tomcat_ver
 }
 
-check_apex_ver() {
+get_apex_ver() {
     local oracle_env=/etc/profile.d/oracle_env.sh
     local sqldir="/opt/sql/bin"
     local sql="$sqldir/sql"
@@ -70,12 +72,11 @@ check_apex_ver() {
     local apex_ver=""
 
     apex_ver=$(echo -n | echo "SELECT comp_name, version, status FROM dba_registry WHERE comp_id='APEX';" \
-        | $sql sys/${syspwd}@${host}:1521/${SID} as sysdba \
-        | grep "VALID" | cut -d" " -f1 )
+        | $sql sys/${syspwd}@localhost:1521/${SID} as sysdba | gawk '/VALID/ { print $4}' )
     echo $apex_ver
 }
 
-check_ords_ver() {
+get_ords_ver() {
     local ords_jar="/opt/tomcat_latest/webapps/apex.war"
 
     if file_exists $ords_jar; then
@@ -86,7 +87,7 @@ check_ords_ver() {
     echo $ords_ver
 }
 
-check_oraclelinux_ver() {
+get_oraclelinux_ver() {
     local oracle_rel=/etc/oracle-release
     local linux_ver=""
 
@@ -100,36 +101,38 @@ check_oraclelinux_ver() {
 }
 
 read_oracle_sys_passwd() {
-    if matches_regex $oracle_db "No oracle DB install"; then
-        e_error "No oracle DB installed -> no sys password!"
-    else
         echo ""
         e_line "###############################################"
         e_arrow " Please provide the Oracle DB SYS password ##"
         e_line "###############################################"
         read -s syspwd
+        #clear
+        # return value from function
         export syspwd
-        clear
-    fi
-
 }
 
 check() {
-#    set_logging
-    olinux_ver=$(check_oraclelinux_ver)
-    tomcat_ver=$(check_tomcat_ver)
-    oracle_db=$(check_oracledb)
-    read_oracle_sys_passwd
-    apex_ver=$(check_apex_ver)
-    ords_ver=$(check_ords_ver)
+    set_logging
+    olinux_ver=$(get_oraclelinux_ver)
+    tomcat_ver=$(get_tomcat_ver)
+    oracle_db=$(get_oracledb_ver)
+    if ! matches_regex $oracle_db "No oracle DB install"; then
+        read_oracle_sys_passwd
+        apex_ver=$(get_apex_ver)
+        ords_ver=$(get_ords_ver)
+    fi
     e_line "------------------------------------------------------"
     e_arrow "Oracle Linux version    : $olinux_ver"
     e_arrow "Tomcat version          : $tomcat_ver"
     e_arrow "Oracle Database version : $oracle_db"
-    e_arrow "Oracle APEX version     : $apex_ver"
-    e_arrow "Oracle ORDs version     : $ords_ver"
+    if ! matches_regex $oracle_db "No oracle DB install"; then
+        e_arrow "Oracle APEX version     : $apex_ver"
+        e_arrow "Oracle ORDs version     : $ords_ver"
+    fi
     e_line "------------------------------------------------------"
 }
 
-
-$cmdline
+(return 0 2>/dev/null) && sourced=1 || $cmdline
+# Dont run the script if it is sourced
+#[[ "${BASH_SOURCE[0]}" != "${0}" ]] && $cmdline
+##[[ sourced = 1 ]] && $cmdline

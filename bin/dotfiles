@@ -87,8 +87,16 @@ function has_oracledb() {
   [[ -e /etc/profile.d/oracle_env.sh ]] || return 1
     }
 
+function has_sqlcl() {
+    hash sql 2>/dev/null || return 1
+    }
+
+function has_sqlplus() {
+    hash sqlplus 2>/dev/null || return 1
+    }
+
 function has_18xe() {
-  [[ ${ORACLE_HOME} =~ $XE18pattern ]] || return 1
+  has_oracledb && [[ ${ORACLE_HOME} =~ $XE18pattern ]] || return 1
 }
 
 function has_gpg_agent() {
@@ -100,7 +108,7 @@ function has_ssh_agent() {
     }
 
 function has_app() {
-  for app in clojure docker gls gpg_agent java rg ssh_agent systemd tomcat oracledb 18xe; do
+  for app in clojure docker gls gpg_agent java rg ssh_agent systemd tomcat oracledb sqlcl sqlplus 18xe; do
     has_$app; [[ $? == ${1:-0} ]] && echo $app
   done
 }
