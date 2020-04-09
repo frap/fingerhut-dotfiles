@@ -2,26 +2,28 @@
 set -o errexit
 set -o nounset
 
-readonly PROGNAME=$(basename $0)
-readonly PROGDIR=$(readlink -n $(dirname $0))
-readonly ARGS="$@"
+[[ ! -z "${DEBUG:-}" ]]  && set -x
+
+#readonly PROGNAME=$(basename $0)
+#readonly PROGDIR=$(readlink -n $(dirname $0))
+#readonly ARGS="$@"
 #Figure out where the script is running
-readonly __SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)"
-
-LS=ls
-
-function set_logging() {
-export logfile=/tmp/$PROGNAME.log
-# Redirect stderr
-exec 2>&1
-# Redirect stdout ( > ) into a named pipe ( >() ) running "tee"
-exec > >(tee -i $logfile)
-}
+#__SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)"
+DOTFILES="${DOTFILES:-~/.local/dotfiles}"
+#LS=ls
 
 cmdline="${1:-check}"
 
+function set_logging() {
+    export logfile=/tmp/$(basename $0).log
+    # Redirect stderr
+    exec 2>&1
+    # Redirect stdout ( > ) into a named pipe ( >() ) running "tee"
+    exec > >(tee -i $logfile)
+}
+
 # Include the robust-bash functions
-source "$__SCRIPT_DIR"/gasbash-lib.sh
+source "${DOTFILES}"/bin/gasbash-lib.sh
 
 get_oracledb_ver() {
     local XE11pattern='11.2.0/xe'
@@ -101,15 +103,16 @@ get_oraclelinux_ver() {
 }
 
 read_oracle_sys_passwd() {
-        echo ""
-        e_line "###############################################"
-        e_arrow " Please provide the Oracle DB SYS password ##"
-        e_line "###############################################"
-        read -s syspwd
-        #clear
-        # return value from function
-        export syspwd
+    echo ""
+    e_line "###############################################"
+    e_arrow " Please provide the Oracle DB SYS password ##"
+    e_line "###############################################"
+    read -s syspwd
+    #clear
+    # return value from function
+    export syspwd
 }
+
 
 check() {
     set_logging
@@ -132,7 +135,8 @@ check() {
     e_line "------------------------------------------------------"
 }
 
-(return 0 2>/dev/null) && sourced=1 || $cmdline
+(return 0 2>/dev/null) && sourced=1 || sourced=0
 # Dont run the script if it is sourced
 #[[ "${BASH_SOURCE[0]}" != "${0}" ]] && $cmdline
-##[[ sourced = 1 ]] && $cmdline
+[[ $sourced == 0 ]] && $cmdline
+return 0

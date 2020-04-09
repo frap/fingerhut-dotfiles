@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-#set -o errexit
-#set -o nounset
+set -o errexit
+set -o nounset
+
+[[ ! -z "${DEBUG:-}" ]]  && set -x
 
 is_empty() {
     local var=$1
@@ -53,7 +55,7 @@ matches_regex() {
 }
 
 # colourful logging capabilities
-#set_logging () {
+set_colours () {
 if tput setaf 1 &> /dev/null; then
 	tput sgr0; # reset colors
 	_bold=$(tput bold);
@@ -87,6 +89,7 @@ else
     _white="\e[1;37m";
     _yellow="\e[1;33m";
 fi;
+
  # Logging stuff.
  function e_header()   { echo -e "\n${_bold}${_purple}$@${_reset}"; }
  function e_success()  { echo -e " ${_bold}${_cyan}✔ $@${_reset}"; }
@@ -96,8 +99,9 @@ fi;
  function e_data()     { echo -e " ${_green}$@${_reset}"; }
  function e_line()     { echo -e " ${_orange}$@${_reset}"; }
  function e_question() { echo -e " ${_violet}$@${_reset}"; }
- function flasher ()   { while true; do printf \\e[?5h; sleep 0.1; printf \\e[?5l; read -s -n1 -t1 && break; done; }
+ #function flasher ()   { while true; do printf \\e[?5h; sleep 0.1; printf \\e[?5l; read -s -n1 -t1 && break; done; }
 
+}
 # For testing.
 function assert() {
   local success modes equals actual expected
@@ -140,12 +144,13 @@ function require_binary {
 trap ctrl_c INT
 
 function ctrl_c() {
-  e_error "Trapped CTRL-C - exiting"
+    e_error "Trapped CTRL-C - Adios!"
+    exit -1
 }
 
 
-#function main() {
-#    set_logging
-#}
+function main() {
+    set_colours
+}
 
-#main
+main
