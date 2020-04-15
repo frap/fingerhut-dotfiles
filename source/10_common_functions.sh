@@ -40,7 +40,7 @@ fi;
  function e_data()     { echo -e " ${_green}$@${_reset}"; }
  function e_line()     { echo -e " ${_orange}$@${_reset}"; }
  function e_question() { echo -e " ${_violet}$@${_reset}"; }
- function flasher ()   { while true; do printf \\e[?5h; sleep 0.1; printf \\e[?5l; read -s -n1 -t1 && break; done; }
+# function flasher ()   { while true; do printf \\e[?5h; sleep 0.1; printf \\e[?5l; read -s -n1 -t1 && break; done; }
 
 is_empty() {
   local var=$1
