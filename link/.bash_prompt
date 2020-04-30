@@ -166,10 +166,10 @@ function prompt_command() {
   #PS1="$PS1$c1[$c0\u$c1@$c0\h$c1:$c0\w$c1]$c9"
   #PS1="$PS1$c3[\u@\h:\w]$c9"
   # exit code: 127
-  PS1+="$(prompt_exitcode "$exit_code")";
+ # PS1+="$(prompt_exitcode "$exit_code")";
   PS1+="${_reset}\n";
   # date: [HH:MM:SS]
-  PS1+="${_white}[${_cyan}$(date +"%H${_white}:${_cyan}%M${_white}:${_cyan}%S")${_white}]";
+  #PS1+="${_white}[${_cyan}$(date +"%H${_white}:${_cyan}%M${_white}:${_cyan}%S")${_white}]";
   PS1+="\[${_purple}\] \$ \[${_reset}\]"; # `$` (and reset color)
   #PS1="$PS1 \$ "
 

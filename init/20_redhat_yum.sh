@@ -1,40 +1,16 @@
 # Redhat-only stuff. Abort if not redHat.
 is_redhat || return 1
 
-# If the old files isn't removed, the duplicate APT alias will break sudo!
-sudoers_old="/etc/sudoers.d/sudoers-atearoot"; [[ -e "$sudoers_old" ]] && sudo rm "$sudoers_old"
-
-# Installing this sudoers file makes life easier.
-sudoers_file="atearoot"
-sudoers_src=$DOTFILES/conf/atea/$sudoers_file
-sudoers_dest="/etc/sudoers.d/$sudoers_file"
-if [[ ! -e "$sudoers_dest" || "$sudoers_dest" -ot "$sudoers_src" ]]; then
-  cat <<EOF
-The sudoers file can be updated to allow "sudo yum" to be executed
-without asking for a password. You can verify that this worked correctly by
-running "sudo -k yum". If it doesn't ask for a password, and the output
-looks normal, it worked.
-
-THIS SHOULD ONLY BE ATTEMPTED IF YOU ARE LOGGED IN AS ROOT IN ANOTHER SHELL.
-
-This will be skipped if "Y" isn't pressed within the next $prompt_delay seconds.
-EOF
-  read -N 1 -t $prompt_delay -p "Update sudoers file? [y/N] " update_sudoers; echo
-  if [[ "$update_sudoers" =~ [Yy] ]]; then
-    e_header "Updating sudoers"
-    visudo -cf "$sudoers_src" &&
-    sudo cp "$sudoers_src" "$sudoers_dest" &&
-    sudo chmod 0440 "$sudoers_dest" &&
-    echo "File $sudoers_dest updated." ||
-    echo "Error updating $sudoers_dest file."
-  else
-    echo "Skipping."
-  fi
-fi
+major_version="`sed 's/^.\+ release \([.0-9]\+\).*/\1/' /etc/redhat-release | awk -F. '{print $1}'`";
 
 # Update YUM.
-e_header "Updating yum"
-	sudo yum -y update
+e_header "Updating VM packages"
+# make sure we use dnf on EL 8+
+if [ "$major_version" -ge 8 ]; then
+  dnf -y update
+else
+  yum -y update
+fi
 
 # install ripgrep
 if which rg >/dev/null 2>&1
@@ -49,7 +25,9 @@ packages=(
 #  ansible
   binutils
   curl
-  git-core
+  python3
+  python3-pip
+  java-1.8.0-openjdk-headless
   htop
   nmap
   nmap-ncat
@@ -58,14 +36,14 @@ packages=(
   tcpdump
 )
 
-# update PIP
-e_header "Updating pip & setuptools"
-sudo pip install --upgrade pip
-sudo pip install --upgrade setuptools
-
 if (( ${#packages[@]} > 0 )); then
   e_header "Installing YUM packages: ${packages[*]}"
   for package in "${packages[@]}"; do
     sudo yum -y install "$package"
   done
 fi
+
+# update PIP
+e_header "Updating pip & setuptools"
+sudo pip install --upgrade pip
+sudo pip install --upgrade setuptools
