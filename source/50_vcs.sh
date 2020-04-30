@@ -1,10 +1,10 @@
-
 # Git shortcuts
 
 alias g='git'
 function ga() { git add "${@:-.}"; } # Add all files by default
 alias gp='git push'
 alias gpa='gp --all'
+alias gpom="git push origin master"
 alias gu='git pull'
 alias gl='git log'
 alias gg='gl --decorate --oneline --graph --date-order --all'

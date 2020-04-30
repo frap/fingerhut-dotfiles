@@ -17,6 +17,13 @@ else
     alias vdir='vdir --color=auto'
 fi
 
+alias h="history"
+alias clr="clear" # Clear your terminal screen
+alias myip="curl icanhazip.com" # Your public IP address
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias curdate='date +"%d-%m-%Y"'
+
 if has_rg
 then
     alias grep='rg'
@@ -30,7 +37,7 @@ if is_osx
 then
     export NVM_DIR="$HOME/.nvm"
     [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion" 
+    [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
 fi
 
 if is_redhat && [[ -r /atea/home/atearoot ]]
