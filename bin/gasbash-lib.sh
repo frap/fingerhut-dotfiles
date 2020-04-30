@@ -25,9 +25,8 @@ is_file() {
 file_exists() {
     local file=$1
 
-    sudo test -e $1
+    test -e $1
 }
-
 
 is_dir() {
     local dir=$1

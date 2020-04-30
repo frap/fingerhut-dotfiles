@@ -55,6 +55,38 @@ export DOTFILES=~/.local/dotfiles
  function e_line()     { echo -e " ${_orange}$@${_reset}"; }
  function e_question() { echo -e " ${_violet}$@${_reset}"; }
 
+ # bash helpers
+function is_file() {
+    local file=$1
+
+    [[ -f $file ]]
+}
+
+function exists() {
+    local file=$1
+
+    test -e $1
+}
+
+function is_dir() {
+    local dir=$1
+
+    [[ -d $dir ]]
+}
+
+function is_link() {
+    local dir=$1
+
+    [[ -L $dir ]]
+}
+
+function matches_regex() {
+    local filepath=$1
+    local regex=$2
+
+    [[ $filepath =~ $regex ]]
+}
+
 
 # OS detection
 function is_osx() {
@@ -99,19 +131,19 @@ function has_clojure() {
 }
 
 function has_tomcat() {
-  [[ -e /opt/tomcat_latest/bin ]] || return 1
+  exists /opt/tomcat_latest/bin  || return 1
     }
 
 function has_systemd() {
-  [[ -e /etc/systemd ]] || return 1
+  exists /etc/systemd  || return 1
     }
 
 function has_oracledb() {
-  [[ -e /etc/profile.d/oracle_env.sh ]] || return 1
+  exists /etc/profile.d/oracle_env.sh || return 1
     }
 
 function has_sqlcl() {
-    hash sql 2>/dev/null || return 1
+  exists /opt/sqlcl/bin/sql  || return 1
     }
 
 function has_sqlplus() {
@@ -365,6 +397,11 @@ fi
 if [[ ! "$(type -P git)" ]] && is_ubuntu; then
   e_header "Installer de Git"
   sudo apt-get -qq install git-core
+fi
+
+if [[ ! "$(type -P git)" ]] && is_redhat; then
+  e_header "Installer de Git"
+  sudo yum install git-core
 fi
 
 # If Git isn't installed by now, something exploded. We gots to quit!
