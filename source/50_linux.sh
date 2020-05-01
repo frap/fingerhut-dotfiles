@@ -24,6 +24,10 @@ then
     alias restarttomcat=tcrst
 fi
 
+if has_sqlcl
+   prepend_to_path_if_exists "/opt/sqlcl/bin"
+fi
+
 export EDITOR="vim"
 export VISUAL="$EDITOR"
 export ALTERNATE_EDITOR=""

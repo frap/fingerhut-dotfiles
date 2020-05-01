@@ -1,3 +1,8 @@
+# source secrets such as VCENTER_PASS
+if [ -f ~/.secrets ]; then
+    . ~/.secrets
+fi
+
 if has_gls
 then
     alias ls="gls --color"

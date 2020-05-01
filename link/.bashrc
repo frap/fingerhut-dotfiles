@@ -2,8 +2,9 @@
 export DOTFILES=~/.local/dotfiles
 
 # Add binaries into the path
+BASH_IT_THEME="powerline-multiline"
 PATH=$DOTFILES/bin:$PATH
-export PATH
+export PATH BASH_IT_THEME
 
 # Source all files in "source"
 function src() {
