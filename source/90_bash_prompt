@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+export BASH_IT=$DOTFILES
+
+# Don't check mail when opening terminal.
+unset MAILCHECK
+
+# Set this to false to turn off version control status checking within the prompt for all themes
+#export SCM_CHECK=true
+
 function _command_exists ()
 {
   type "$1" &> /dev/null ;
@@ -20,10 +28,10 @@ if [[ ! -z "${BASH_IT_THEME}" ]]; then
   export LSCOLORS='Gxfxcxdxdxegedabagacad'
 
   # Load the theme
-  if [[ -f $BASH_IT_THEME ]]; then
-        source $BASH_IT_THEME
-  else
+  #if [[ -f $BASH_IT_THEME ]]; then
+  #      source $BASH_IT_THEME
+  #else
         source "$DOTFILES/themes/$BASH_IT_THEME/$BASH_IT_THEME.theme.bash"
-  fi
+  #fi
 
 fi
