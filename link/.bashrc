@@ -23,7 +23,7 @@ function src() {
             export PS1="> "
             ;;
         xterm*|rxvt*|eterm*|screen*)
-            tty -s && source ~/.bash_prompt
+ #           tty -s && source ~/.bash_prompt
             ;;
   esac
 }

@@ -101,11 +101,17 @@ function is_ubuntu_desktop() {
 function is_redhat() {
   [[ "$(cat /etc/redhat-release 2> /dev/null)" =~ "Red Hat" ]] || return 1
 }
+function is_oraclelinux() {
+  [[ "$(cat /etc/oracle-release 2> /dev/null)" =~ "Oracle Linux" ]] || return 1
+}
+
+major_release="$(sed 's/^.\+ release \([.0-9]\+\).*/\1/' /etc/redhat-release | awk -F. '{print $1}')"
+
 function is_linux() {
   is_ubuntu || is_redhat
 }
 function get_os() {
-  for os in osx ubuntu ubuntu_desktop redhat linux; do
+  for os in linux osx oraclelinux redhat ubuntu; do
     is_$os; [[ $? == ${1:-0} ]] && echo $os
   done
 }

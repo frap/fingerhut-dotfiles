@@ -17,7 +17,7 @@ fi
 if which rg >/dev/null 2>&1
   then
     e_header "Installing ripgrep"
-    sudo yum-config-manager --add-repo=Https://Copr.Fedorainfracloud.Org/Coprs/Carlwgeorge/Ripgrep/Repo/Epel-7/carlwgeorge-ripgrep-epel-7.repo
+    sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
     sudo yum -y install ripgrep
 fi
 
@@ -36,6 +36,7 @@ packages=(
   socat
   tree
   tcpdump
+  vim
 )
 
 if (( ${#packages[@]} > 0 )); then
@@ -45,8 +46,8 @@ if (( ${#packages[@]} > 0 )); then
   done
 fi
 
-sudo ln -s /usr/bin/python3 /usr/local/bin/python
-sudo ln -s /usr/bin/pip3.6 /usr/local/bin/pip
+#sudo ln -s /usr/bin/python3 /usr/local/bin/python
+#sudo ln -s /usr/bin/pip3.6 /usr/local/bin/pip
 # update PIP
-e_header "Updating pip"
-sudo /usr/local/bin/pip install --upgrade pip
+#e_header "Updating pip"
+#sudo /usr/local/bin/pip install --upgrade pip

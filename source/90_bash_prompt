@@ -28,10 +28,10 @@ if [[ ! -z "${BASH_IT_THEME}" ]]; then
   export LSCOLORS='Gxfxcxdxdxegedabagacad'
 
   # Load the theme
-  #if [[ -f $BASH_IT_THEME ]]; then
-  #      source $BASH_IT_THEME
-  #else
+  if [[ -f $BASH_IT_THEME ]]; then
+        source $BASH_IT_THEME
+  else
         source "$DOTFILES/themes/$BASH_IT_THEME/$BASH_IT_THEME.theme.bash"
-  #fi
+  fi
 
 fi
