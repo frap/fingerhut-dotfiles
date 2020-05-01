@@ -26,12 +26,13 @@ packages=(
 #  ansible
   binutils
   curl
-  python3
-  python3-pip
-  java-1.8.0-openjdk-headless
+  emacs-nox
   htop
+  java-1.8.0-openjdk-headless
   nmap
   nmap-ncat
+  python3
+  python3-pip
   socat
   tree
   tcpdump
