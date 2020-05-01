@@ -25,6 +25,7 @@ then
 fi
 
 if has_sqlcl
+then
    prepend_to_path_if_exists "/opt/sqlcl/bin"
 fi
 

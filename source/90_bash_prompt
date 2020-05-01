@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
+function _command_exists ()
+{
+  type "$1" &> /dev/null ;
+}
+
 # Load theme, if a theme was set
 if [[ ! -z "${BASH_IT_THEME}" ]]; then
   # Load colors and helpers first so they can be used in base theme
-  # shellcheck source=./themes/colors.theme.bash
-  source "${DOTFILES}/themes/colors.theme.bash"
+  source "${DOTFILES}/themes/colours.theme.bash"
   # shellcheck source=./themes/githelpers.theme.bash
   source "${DOTFILES}/themes/githelpers.theme.bash"
   # shellcheck source=./themes/p4helpers.theme.bash
