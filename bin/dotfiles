@@ -105,8 +105,13 @@ function is_oraclelinux() {
   [[ "$(cat /etc/oracle-release 2> /dev/null)" =~ "Oracle Linux" ]] || return 1
 }
 
-major_release="$(sed 's/^.\+ release \([.0-9]\+\).*/\1/' /etc/redhat-release | awk -F. '{print $1}') 2> /dev/null"
-
+function major_release() {
+    if exists /etc/redhat-release
+    then
+        "$(sed 's/^.\+ release \([.0-9]\+\).*/\1/' /etc/redhat-release | awk -F. '{print $1}')"
+    fi
+}
+        
 function is_linux() {
   is_ubuntu || is_redhat
 }
