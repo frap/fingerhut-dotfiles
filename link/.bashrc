@@ -6,7 +6,7 @@ BASH_IT_THEME="powerline-multiline"
 PATH=$DOTFILES/bin:$PATH
 export THEME_CLOCK_FORMAT="%H:%M"
 export POWERLINE_LEFT_PROMPT="scm wd"
-export POWERLINE_RIGHT_PROMPT="clock battery shlvl hostname user_info"
+export POWERLINE_RIGHT_PROMPT="clock battery shlvl user_info hostname"
 export PATH BASH_IT_THEME
 
 # Source all files in "source"
