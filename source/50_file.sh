@@ -5,7 +5,7 @@ umask 022
 
 # Always use colour output for `ls`
 #if is_osx; then
- if which /usr/local/bin/gls >/dev/null 2>&1
+ if has_gls
   then
   #       make ls mark directories (F),
   #       show all files except . and .. (A), and show sizes (s)
@@ -56,6 +56,13 @@ alias eachdir=". eachdir"
 function md() {
   mkdir -p "$@" && cd "$@"
 }
+
+
+alias h="history"
+alias clr="clear"               # Clear your terminal screen
+alias path='echo -e ${PATH//:/\\n}'
+alias now='date +"%T"'
+alias curdate='date +"%d-%m-%Y"'
 
 # TBD: Consider uncommenting after I learn how it works
 # Fast directory switching

@@ -32,29 +32,17 @@ __dir="$(cd -P "$(dirname "$SOURCE")" && pwd)"
 # Where the magic happens.
 export DOTFILES=~/.local/dotfiles
 
-_bold=''
-_reset="\e[0m"
-_uline="\e[4m"
-_inverse="\e[7m"
-_black="\e[1;30m"
-_blue="\e[1;34m"
-_cyan="\e[1;36m"
-_green="\e[1;32m"
-_orange="\e[1;33m"
-_purple="\e[1;35m"
-_red="\e[1;31m"
-_violet="\e[1;35m"
-_white="\e[1;37m"
-_yellow="\e[1;33m"
+# Load colors and helpers first so they can be used in base theme
+source "${DOTFILES}/themes/colours.theme.bash"
 
-function e_header() { echo -e "\n${_bold}${_purple}$@${_reset}"; }
-function e_success() { echo -e " ${_bold}${_cyan}✔ $@${_reset}"; }
-function e_error() { echo -e " ${_bold}${_red}✖  $@${_reset}"; }
-function e_arrow() { echo -e " ${_bold}${_yellow}➜${_reset}${_cyan} $@${_reset}"; }
-function e_info() { echo -e " ${_green}∴ $@${_reset}"; }
-function e_data() { echo -e " ${_green}$@${_reset}"; }
-function e_line() { echo -e " ${_orange}$@${_reset}"; }
-function e_question() { echo -e " ${_violet}$@${_reset}"; }
+function e_header() { echo -e "\n${echo_bold_purple}$@${echo_reset_color}"; }
+function e_success() { echo -e " ${echo_bold_cyan}✔ $@${echo_reset_color}"; }
+function e_error() { echo -e " ${echo_bold_red}✖  $@${echo_reset_color}"; }
+function e_arrow() { echo -e " ${echo_bold_yellow}➜${echo_reset_color}${_cyan} $@${echo_reset_color}"; }
+function e_info() { echo -e " ${echo_green}∴ $@${echo_reset_color}"; }
+function e_data() { echo -e " ${echo_green}$@${echo_reset_color}"; }
+function e_line() { echo -e " ${echo_orange}$@${echo_reset_color}"; }
+function e_question() { echo -e " ${echo-purple}$@${echo_reset_color}"; }
 
 # bash helpers
 function is_file() {
@@ -169,12 +157,16 @@ function has_gpg_agent() {
 	hash gpg-connect-agent 2>/dev/null || return 1
 }
 
+function has_govc() {
+	hash govc 2>/dev/null || return 1
+}
+
 function has_ssh_agent() {
 	hash ssh-agent 2>/dev/null || return 1
 }
 
 function has_app() {
-	for app in clojure docker gls gpg_agent java rg ssh_agent systemd tomcat oracledb sqlcl sqlplus 18xe; do
+	for app in clojure docker gls govc gpg_agent java rg ssh_agent systemd tomcat oracledb sqlcl sqlplus 18xe; do
 		has_$app
 		[[ $? == ${1:-0} ]] && echo $app
 	done

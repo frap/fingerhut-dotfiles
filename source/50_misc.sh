@@ -58,7 +58,7 @@ fi
 
 # TBD: This still has some tcsh-isms in it.  Consider converting to
 # bash function.
-alias search='find \!:1 -type f -exec grep -i -n \!:2 '{}' /dev/null \;'
+alias search='find \!:1 -type f -exec \grep -i -n \!:2 '{}' /dev/null \;'
 
 # disable ctrl-d as logout method, unless you press it 10 times in row
 IGNOREEOF=10

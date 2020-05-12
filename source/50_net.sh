@@ -1,5 +1,10 @@
+# source secrets such as VCENTER_PASS
+if [ -f ~/.secrets ]; then
+    . ~/.secrets
+fi
 # IP addresses
 alias wanip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias myip="curl icanhazip.com" # Your public IP address
 alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache
@@ -19,7 +24,6 @@ function pingtest() {
 
 if which govc  >/dev/null 2>&1
 then
-    export VCENTER_PASS="${VCENTER_PASS:-changeme}"
     export GOVC_URL=https://administrator@vsphere.local:${VCENTER_PASS}@vcenter.atea.dev
     export GOVC_TLS_KNOWN_HOSTS=~/.govc_known_hosts
     export GOVC_INSECURE=true
