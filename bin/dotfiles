@@ -36,13 +36,13 @@ export DOTFILES=~/.local/dotfiles
 source "${DOTFILES}/themes/colours.theme.bash"
 
 function e_header() { echo -e "\n${echo_bold_purple}$@${echo_reset_color}"; }
-function e_success() { echo -e " ${echo_bold_cyan}✔ $@${echo_reset_color}"; }
-function e_error() { echo -e " ${echo_bold_red}✖  $@${echo_reset_color}"; }
-function e_arrow() { echo -e " ${echo_bold_yellow}➜${echo_reset_color}${_cyan} $@${echo_reset_color}"; }
-function e_info() { echo -e " ${echo_green}∴ $@${echo_reset_color}"; }
-function e_data() { echo -e " ${echo_green}$@${echo_reset_color}"; }
-function e_line() { echo -e " ${echo_orange}$@${echo_reset_color}"; }
-function e_question() { echo -e " ${echo-purple}$@${echo_reset_color}"; }
+function e_success() { echo -e "${echo_bold_cyan}✔ $@${echo_reset_color}"; }
+function e_error() { echo -e "${echo_bold_red}✖  $@${echo_reset_color}"; }
+function e_arrow() { echo -e "${echo_bold_yellow}➜${echo_cyan} $@${echo_reset_color}"; }
+function e_info() { echo -e "${echo_green}∴ $@${echo_reset_color}"; }
+function e_data() { echo -e "${echo_green}$@${echo_reset_color}"; }
+function e_line() { echo -e "${echo_orange}$@${echo_reset_color}"; }
+function e_question() { echo -e "${echo_purple}$@${echo_reset_color}"; }
 
 # bash helpers
 function is_file() {
@@ -78,7 +78,7 @@ function matches_regex() {
 
 # OS detection
 function is_osx() {
-	[[ "$OSTYPE" =~ ^darwin ]] || return 1
+	[[ "$OSTYPE" =~ ^darwin ]] 2>/dev/null || return 1
 }
 function is_ubuntu() {
 	[[ "$(cat /etc/issue 2>/dev/null)" =~ Ubuntu ]] || return 1
