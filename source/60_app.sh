@@ -122,7 +122,7 @@ then
         return
       fi
 
-      echo "Il y a un ssh-agent mort au palier..."
+      e_info "Il y a un ssh-agent mort au palier..."
       ssh-agent > "${SSH_AGENT_ENV}"
       return
     }
@@ -143,8 +143,8 @@ then
       _is_proc_alive_at_pid "${agent_pid}" \
         || return # process is not alive - no problem
 
-      echo -e -n "Le teur ssh-agent (pid:${agent_pid}) ... "
-      kill -9 "${agent_pid}" && echo "FINI" || echo "FAILED"
+      e_error "Le teur ssh-agent (pid:${agent_pid}) ... "
+      kill -9 "${agent_pid}" && e_info "FINI" || e_error "FAILED"
       rm -f "${SSH_AGENT_ENV}"
     }
 
