@@ -47,14 +47,14 @@ _violet="\e[1;35m"
 _white="\e[1;37m"
 _yellow="\e[1;33m"
 
-function e_header() { printf "\n%6b${_purple}%20${_reset}\n" "\U1F916" "$@"; }
-function e_success() { printf "%6b${_cyan}%20s${_reset}\n" "✔" "$@"; }
-function e_error() { printf "%6b${_red}%20s${_reset}\n" "✖" "$@"; }
-function e_arrow() { printf "${_yellow}%6b${cyn}%20s${_reset}\n" "➜" "$@"; }
-function e_info() { printf "${_green}%6b%20s${_reset}\n" "∴" "$@"; }
-function e_data() { printf "${_green}%6b%20s${_reset}\n" " " "$@"; }
+function e_header() { printf "\n${purple}%6b%40${_reset}\n" "\U1F916" "$@"; }
+function e_success() { printf "${cyan}%6b%40s${_reset}\n" "✔" "$@"; }
+function e_error() { printf "${red}%6b%40s${_reset}\n" "✖" "$@"; }
+function e_arrow() { printf "${_yellow}%6b${_cyan}%40s${_reset}\n" "➜" "$@"; }
+function e_info() { printf "${_green}%6b%40s${_reset}\n" "∴" "$@"; }
+function e_data() { printf "${_green}%6b%40s${_reset}\n" " " "$@"; }
 function e_line() { printf "${_yellow}$@${_reset}\n"; }
-function e_question() { printf "${_purple}%6b%20s${_reset}\n" "\U2049" "$@"; }
+function e_question() { printf "${_purple}%6b%40s${_reset}\n" "\U2049" "$@"; }
 
 # bash helpers
 function is_file() {
