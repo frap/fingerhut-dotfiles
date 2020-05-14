@@ -32,6 +32,9 @@ __dir="$(cd -P "$(dirname "$SOURCE")" && pwd)"
 # Where the magic happens.
 export DOTFILES=~/.local/dotfiles
 
+# Load colors and helpers first so they can be used in base theme
+source "${DOTFILES}/themes/colours.theme.bash"
+
 _bold=''
 _reset="\e[0m"
 _uline="\e[4m"
