@@ -91,9 +91,7 @@ then
 
 
     function _ensure_valid_sshagent_env() {
-      local \
-        agent_pid \
-        tmp_res
+      local agent_pid tmp_res
 
       mkdir -p "${HOME}/.ssh"
       type restorecon &> /dev/null
@@ -123,6 +121,7 @@ then
       fi
 
       e_info "Il y a un ssh-agent mort au palier..."
+      #rm -f "${SSH_AGENT_ENV}"
       ssh-agent > "${SSH_AGENT_ENV}"
       return
     }
@@ -130,21 +129,21 @@ then
 
     function _ensure_sshagent_dead() {
       [[ -r "${SSH_AGENT_ENV}" ]] \
-        || return ## no agent file - no problems
+      || return ## no agent file - no problems
       ## ensure the file indeed points to a really running agent:
       agent_pid=$(
         _get_sshagent_pid_from_env_file \
-          "${SSH_AGENT_ENV}"
-               )
+        "${SSH_AGENT_ENV}"
+      )
 
       [[ -n "${agent_pid}" ]] \
-        || return # no pid - no problem
+      || return # no pid - no problem
 
       _is_proc_alive_at_pid "${agent_pid}" \
-        || return # process is not alive - no problem
+      || return # process is not alive - no problem
 
-      e_error "Le teur ssh-agent (pid:${agent_pid}) ... "
-      kill -9 "${agent_pid}" && e_info "FINI" || e_error "FAILED"
+      echo "Le teur ssh-agent (pid:${agent_pid}) ... "
+      kill -9 "${agent_pid}" && echo "FINI" || echo "FAILED"
       rm -f "${SSH_AGENT_ENV}"
     }
 
@@ -152,20 +151,20 @@ then
     function sshagent() {
 
       [[ -z "${SSH_AGENT_ENV}" ]] \
-        && export SSH_AGENT_ENV="${HOME}/.ssh/agent_env.${HOSTNAME}"
+      && export SSH_AGENT_ENV="${HOME}/.ssh/agent_env.${HOSTNAME}"
 
       case "${1}" in
         on) _ensure_valid_sshagent_env;
-            source "${SSH_AGENT_ENV}" > /dev/null;
-            ;;
+          source "${SSH_AGENT_ENV}" > /dev/null;
+          ;;
         off) _ensure_sshagent_dead
-             ;;
+          ;;
         *)
-             ;;
+          ;;
       esac
     }
 
-    sshagent on
+    #sshagent on
 
     function add_ssh() {
 
