@@ -57,12 +57,14 @@ fi
 # Install APT packages.
 packages=(
 #  ansible
+  bat
   build-essential
-  cmatrix
+#  cmatrix
   cowsay
   curl
   docker.io
   docker-compose
+  fd-find
   git-core
 #  imagemagick
   jq

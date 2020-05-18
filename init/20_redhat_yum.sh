@@ -27,7 +27,6 @@ packages=(
   binutils
   curl
   emacs-nox
-  htop
   java-1.8.0-openjdk-headless
   nmap
   nmap-ncat
@@ -46,8 +45,9 @@ if (( ${#packages[@]} > 0 )); then
   done
 fi
 
-#sudo ln -s /usr/bin/python3 /usr/local/bin/python
-#sudo ln -s /usr/bin/pip3.6 /usr/local/bin/pip
-# update PIP
-#e_header "Updating pip"
-#sudo /usr/local/bin/pip install --upgrade pip
+
+sudo ln -s /usr/bin/python3 /usr/local/bin/python
+sudo ln -s /usr/bin/pip3.6 /usr/local/bin/pip
+
+# procs replacement for htop
+rpm -i https://github.com/dalance/procs/releases/download/v0.10.3/procs-0.10.3-1.x86_64.rpm
