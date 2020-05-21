@@ -4,8 +4,18 @@
 umask 022
 
 # Always use colour output for `ls`
-#if is_osx; then
- if has_gls
+if has_exa
+  then
+    alias ls="exa --long"
+    alias la="exa --long -a --sort modified --reverse"
+    alias ld="exa --only-dirs --tree --level 3"
+    alias ll="exa --tree --level 3"
+    alias l="exa --long -a"
+    alias lls="exa --long --sort size --reverse"
+fi
+elif is_osx
+then
+  if has_gls
   then
   #       make ls mark directories (F),
   #       show all files except . and .. (A), and show sizes (s)
@@ -14,8 +24,9 @@ umask 022
       alias  l="/usr/local/bin/gls --color -alhF"
       alias lls="/usr/local/bin/gls --color -alhSr"
       alias la="/usr/local/bin/gls --color -Atr"
-      alias dir="/usr/local/bin/gls --color=auto"
- else
+  fi
+fi
+else
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias ll='ls -alhFtr'
@@ -26,11 +37,6 @@ umask 022
     alias vdir='dir -sAF'
 fi
 
-# Directory listing
-if [[ "$(type -P tree)" ]]; then
-  alias ll='tree --dirsfirst -aLpughDFiC 1'
-  alias lsd='ll -d'
-fi
 
 # Easier navigation: .., ..., -
 #alias ..='cd ..'
@@ -39,8 +45,8 @@ fi
 
 
 # Long listing of only the most recently updated files
-lr () { ll -rt "$@" | tail ; }
-lra () { ll -rt "$@" ; }
+#lr () { ll -rt "$@" | tail ; }
+#lra () { ll -rt "$@" ; }
 
 # File size
 alias fs="stat -f '%z bytes'"
@@ -57,8 +63,6 @@ function md() {
   mkdir -p "$@" && cd "$@"
 }
 
-
-alias h="history"
 alias clr="clear"               # Clear your terminal screen
 alias path='echo -e ${PATH//:/\\n}'
 alias now='date +"%T"'

@@ -114,6 +114,10 @@ function has_gls() {
 	hash gls 2>/dev/null || return 1
 }
 
+function has_exa() {
+	hash exa 2>/dev/null || return 1
+}
+
 function has_docker() {
 	hash docker 2>/dev/null || return 1
 }
@@ -167,7 +171,7 @@ function has_ssh_agent() {
 }
 
 function has_app() {
-	for app in clojure docker gls govc gpg_agent java rg ssh_agent systemd tomcat oracledb sqlcl sqlplus 18xe; do
+	for app in clojure docker exa gls govc gpg_agent java rg ssh_agent systemd tomcat oracledb sqlcl sqlplus 18xe; do
 		has_$app
 		[[ $? == ${1:-0} ]] && echo $app
 	done
@@ -430,6 +434,10 @@ if [[ ! -d $DOTFILES ]]; then
 	prompt_delay=10
 	e_header "Le téléchargement de dotfiles"
 	git clone --recursive git://github.com/${github_user:-frap}/atea-dotfiles.git $DOTFILES
+	# setup ssh directory
+	chmod 0600 $DOTFILES/link/.ssh/config
+	chmod 0700 $DOTFILES/link/.ssh
+	chmod 0700 $DOTFILES/link
 	cd $DOTFILES
 elif [[ "$1" != "restart" ]]; then
 	# Make sure we have the latest files.
@@ -466,7 +474,7 @@ do_stuff "init"
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
-	echo -e "\nLes sauvegardes ont été déplacées vers ~/${backup_dir#$HOME/}"
+	e_info "\nLes sauvegardes ont été déplacées vers ~/${backup_dir#$HOME/}"
 fi
 
 # All done!
