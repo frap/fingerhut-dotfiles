@@ -12,7 +12,6 @@ if has_exa
     alias ll="exa --tree --level 3"
     alias l="exa --long -a"
     alias lls="exa --long --sort size --reverse"
-fi
 elif is_osx
 then
   if has_gls
@@ -25,7 +24,6 @@ then
       alias lls="/usr/local/bin/gls --color -alhSr"
       alias la="/usr/local/bin/gls --color -Atr"
   fi
-fi
 else
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
