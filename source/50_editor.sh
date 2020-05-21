@@ -2,12 +2,12 @@
 
 alias vi=vim
 
-if [ -x "/Applications/Emacs.app/Contents/MacOS/Emacs" ]
+if [[ -x "/Applications/Emacs.app/Contents/MacOS/Emacs" ]]
 then
     export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
 fi
 
-if [-z "$EMACS"];
+if [[ -z "$EMACS" ]];
 then
   export EDITOR=vim
 else
