@@ -69,10 +69,12 @@ packages=(
 #  imagemagick
   jq
   nmap
+  openjdk-11-jdk-headless
   ripgrep
   socat
   thefuck
   tree
+  unzip
   vim
 )
 
@@ -116,6 +118,18 @@ if (( ${#packages[@]} > 0 )); then
   for package in "${packages[@]}"; do
     sudo apt-get -qq install "$package"
   done
+fi
+
+#install rust
+#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+## install procs
+e_install "Installing procs"
+if command -v procs >/dev/null 2>&1; then
+  e_install "Installing procs"
+  curl -sLJO https://github.com/dalance/procs/releases/download/v0.10.3/procs-v0.10.3-x86_64-lnx.zip /tmp/procs.zip
+  unzip /tmp/procs.zip
+  sudo mv /tmp/procs /usr/local/bin/
+  sudo chmod 755 /usr/local/bin/procs
 fi
 
 # Install Git Extras

@@ -4,18 +4,14 @@
 umask 022
 
 # Always use colour output for `ls`
-if has_exa
-  then
+if has_exa; then
     alias ls="exa --long"
     alias la="exa --long -a --sort modified --reverse"
     alias ld="exa --only-dirs --tree --level 3"
     alias ll="exa --tree --level 3"
     alias l="exa --long -a"
     alias lls="exa --long --sort size --reverse"
-elif is_osx
-then
-  if has_gls
-  then
+elif is_osx && has_gls; then
   #       make ls mark directories (F),
   #       show all files except . and .. (A), and show sizes (s)
       alias ls="/usr/local/bin/gls --color -sAF"
@@ -23,16 +19,13 @@ then
       alias  l="/usr/local/bin/gls --color -alhF"
       alias lls="/usr/local/bin/gls --color -alhSr"
       alias la="/usr/local/bin/gls --color -Atr"
-  fi
 else
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias ll='ls -alhFtr'
-    alias  l='ls -alhF'
-    alias lls='ls -alhSr'
-    alias la='ls -Atr'
-    alias dir='ls --color=auto'
-    alias vdir='dir -sAF'
+  alias ls='ls --color=auto'
+  alias ll='ls -alhFtr'
+  alias  l='ls -alhF'
+  alias lls='ls -alhSr'
+  alias la='ls -Atr'
 fi
 
 

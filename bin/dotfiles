@@ -36,8 +36,9 @@ export DOTFILES=~/.local/dotfiles
 source "${DOTFILES}/themes/colours.theme.bash"
 
 function e_header() { printf "\n%6b${echo_purple}  %-60s${reset}\n" "\U0001F916" "$@"; }
+function e_install() { printf "%6b${echo_purple}  %-60s${reset}\n" "🏗 " "$@"; }
 function e_success() { printf "${echo_cyan}%6b  %-60s${reset}\n" "✔" "$@"; }
-function e_error() { printf "${echo_red}%6b  %-60s${reset}\n" "✖" "$@"; }
+function e_error() { printf "${echo_red}%6b  %-60s${reset}\n" "🧨" "$@"; }
 function e_arrow() { printf "${echo_yellow}%6b  ${echo_cyan}%-60s${reset}\n" "➜" "$@"; }
 function e_info() { printf "${echo_green}%6b  %-60s${reset}\n" "∴" "$@"; }
 function e_data() { printf "${echo_green}%6b  %-60s${reset}\n" "➜" "$@"; }
