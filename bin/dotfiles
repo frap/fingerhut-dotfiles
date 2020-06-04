@@ -35,10 +35,10 @@ export DOTFILES=~/.local/dotfiles
 # Load colors and helpers first so they can be used in base theme
 source "${DOTFILES}/themes/colours.theme.bash"
 
-function e_header() { printf "\n%6b${echo_purple}  %-60s${reset}\n" "\U0001F916" "$@"; }
+function e_header() { printf "\n%2b${echo_purple}  %-70s${reset}\n" "\U0001F916" "$@"; }
 function e_install() { printf "%6b${echo_purple}  %-60s${reset}\n" "🏗 " "$@"; }
-function e_success() { printf "${echo_cyan}%6b  %-60s${reset}\n" "✔" "$@"; }
-function e_error() { printf "${echo_red}%6b  %-60s${reset}\n" "🧨" "$@"; }
+function e_success() { printf "${echo_cyan}%2b  %-60s${reset}\n" "✔" "$@"; }
+function e_error() { printf "${echo_red}%2b  %-60s${reset}\n" "🧨" "$@"; }
 function e_arrow() { printf "${echo_yellow}%6b  ${echo_cyan}%-60s${reset}\n" "➜" "$@"; }
 function e_info() { printf "${echo_green}%6b  %-60s${reset}\n" "∴" "$@"; }
 function e_data() { printf "${echo_green}%6b  %-60s${reset}\n" "➜" "$@"; }
@@ -103,11 +103,10 @@ function is_custtsp() {
     exists "/atea/home/thirdparty" || return 1
 }
 
-function major_release() {
-	if exists /etc/redhat-release; then
-		"$(sed 's/^.\+ release \([.0-9]\+\).*/\1/' /etc/redhat-release | awk -F. '{print $1}')"
-	fi
-}
+
+if exists /etc/redhat-release; then
+	redhat_version="$(sed 's/^.\+ release \([.0-9]\+\).*/\1/' /etc/redhat-release | awk -F. '{print $1}')"
+fi
 
 function is_linux() {
 	is_ubuntu || is_redhat || is_oraclelinux

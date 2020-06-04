@@ -2,7 +2,7 @@
 is_redhat || return 1
 
 # Package management
-if major_version ge 8
+if [ $redhat_version -ge 8 ]
 then
    alias update="sudo dnf update"
    alias install="sudo dnf install"

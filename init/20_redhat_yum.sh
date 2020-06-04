@@ -1,12 +1,10 @@
 # Redhat-only stuff. Abort if not redHat.
 is_redhat || return 1
 
-#major_version="`sed 's/^.\+ release \([.0-9]\+\).*/\1/' /etc/redhat-release | awk -F. '{print $1}'`";
-
 # Update YUM.
 e_header "Updating VM packages"
 # make sure we use dnf on EL 8+
-if [ "$major_version" -ge "8" ]; then
+if [ $redhat_version -ge 8 ]; then
   sudo dnf -y update
 else
   sudo yum -y update
@@ -42,7 +40,7 @@ packages=(
 
 if (( ${#packages[@]} > 0 ));
 then
-elif [ "$major_version" -ge "8" ];
+elif [ $redhat_version -ge 8 ];
 then
   e_header "Installing packages via DNF: $[packages[*]]"
   for package in "${packages[@]}"; do
