@@ -2,18 +2,10 @@
 
 alias vi=vim
 
-if [[ -x "/Applications/Emacs.app/Contents/MacOS/Emacs" ]]
-then
-    export EMACS="/Applications/Emacs.app/Contents/MacOS/Emacs"
-fi
-
-if [[ -z "$EMACS" ]];
-then
-  export EDITOR=vim
-else
-  export EDITOR="${EMACS}"
-fi
-export VISUAL="${EDITOR}"
+# Set the terminal's title bar.
+function titlebar() {
+  echo -n $'\e]0;'"$*"$'\a'
+}
 
 function ec() {
   if [ -z "$DISPLAY" ]; then
@@ -28,5 +20,13 @@ function ec() {
   fi
 }
 
+if is_ateatsp
+then
+    export EDITOR="vim"
+else
+    export EDITOR="ec"
+fi
+
 alias e=ec
-alias emacs=ec
+export VISUAL="${EDITOR}"
+export ALTERNATE_EDITOR=""

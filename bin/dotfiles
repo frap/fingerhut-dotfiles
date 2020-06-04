@@ -95,6 +95,14 @@ function is_oraclelinux() {
 	[[ "$(cat /etc/oracle-release 2>/dev/null)" =~ "Oracle Linux" ]] || return 1
 }
 
+function is_ateatsp() {
+    exists "/atea/home/atearoot" || return 1
+}
+
+function is_custtsp() {
+    exists "/atea/home/thirdparty" || return 1
+}
+
 function major_release() {
 	if exists /etc/redhat-release; then
 		"$(sed 's/^.\+ release \([.0-9]\+\).*/\1/' /etc/redhat-release | awk -F. '{print $1}')"
@@ -102,10 +110,11 @@ function major_release() {
 }
 
 function is_linux() {
-	is_ubuntu || is_redhat
+	is_ubuntu || is_redhat || is_oraclelinux
 }
+
 function get_os() {
-	for os in linux osx oraclelinux redhat ubuntu; do
+	for os in linux osx oraclelinux redhat ubuntu ateatsp custtsp; do
 		is_$os
 		[[ $? == ${1:-0} ]] && echo $os
 	done

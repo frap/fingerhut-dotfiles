@@ -37,7 +37,6 @@ complete -W "NSGlobalDomain" defaults;
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal" killall;
 
-    
 # APPLE, Y U PUT /usr/bin B4 /usr/local/bin?!
 prepend_to_path_if_exists "/usr/local/bin"
 prepend_to_path_if_exists "/opt/local/bin"
@@ -56,6 +55,11 @@ alias c="tr -d '\n' | pbcopy"
 
 # Start ScreenSaver. This will lock the screen if locking is enabled.
 alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
+
+#NVM settings
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh" # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
 
 # Create a new Parallels VM from template, replacing the existing one.
 function vm_template() {
@@ -88,7 +92,7 @@ function vm_template() {
   open -g "$dest"
 }
 
-# Export Localization.prefPane text substitution rules.
+# Export Localisation.prefPane text substitution rules.
 function txt_sub_backup() {
   local prefs=~/Library/Preferences/.GlobalPreferences.plist
   local backup=$DOTFILES/conf/osx/NSUserReplacementItems.plist
@@ -111,7 +115,3 @@ function txt_sub_restore() {
   )
   for cmd in "${cmds[@]}"; do /usr/libexec/PlistBuddy -c "$cmd" "$prefs"; done
 }
-
-export EDITOR="ec"
-export VISUAL="$EDITOR"
-export ALTERNATE_EDITOR=""
