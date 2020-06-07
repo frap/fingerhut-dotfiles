@@ -38,9 +38,7 @@ packages=(
   vim
 )
 
-if (( ${#packages[@]} > 0 ));
-then
-elif [ $redhat_version -ge 8 ];
+if (( ${#packages[@]} > 0 )) && [ $redhat_version -ge 8 ];
 then
   e_header "Installing packages via DNF: $[packages[*]]"
   for package in "${packages[@]}"; do
