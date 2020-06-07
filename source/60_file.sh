@@ -8,6 +8,7 @@ if has_exa; then
     alias ls="exa --long -g"
     alias la="exa --long -ag --sort modified --reverse"
     alias ld="exa --only-dirs --tree --level 3"
+    alias ll='exa --long -ag --sort accessed'
     alias ll2="exa --tree --level 2"
     alias ll3="exa --tree --level 3"
     alias l="exa --long -ag"
