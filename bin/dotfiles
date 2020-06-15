@@ -35,16 +35,16 @@ export DOTFILES=~/.local/dotfiles
 # Load colors and helpers first so they can be used in base theme
 source "${DOTFILES}/themes/colours.theme.bash"
 
-function e_header() { printf "\n%2b${echo_purple}  %-70s${reset}\n" "\U0001F916" "$@"; }
-function e_install() { printf "%6b${echo_purple}  %-60s${reset}\n" "🏗 " "$@"; }
-function e_success() { printf "${echo_cyan}%2b  %-60s${reset}\n" "✔" "$@"; }
-function e_error() { printf "${echo_red}%2b  %-60s${reset}\n" "🧨" "$@"; }
-function e_arrow() { printf "${echo_yellow}%6b  ${echo_cyan}%-60s${reset}\n" "➜" "$@"; }
-function e_info() { printf "${echo_green}%6b  %-60s${reset}\n" "∴" "$@"; }
-function e_data() { printf "${echo_green}%6b  %-60s${reset}\n" "➜" "$@"; }
-function e_line() { printf "${echo_yellow}%6b  %-60s${reset}\n" "\U262F" "$@"; }
-function e_sep() { printf "${echo_yellow}%6b  %60s${reset}\n" "\U1F4CD" "--------------------------------------------------------"; }
-function e_question() { printf "${echo_purple}%6b  %-60s${reset}\n" "\U00002049" "$@"; }
+function e_header() { printf "\n%2b${echo_purple}  %-70s${echo_reset_color}\n" "\U0001F916" "$@"; }
+function e_install() { printf "%6b${echo_purple}  %-60s${echo_reset_color}\n" "🏗 " "$@"; }
+function e_success() { printf "${echo_cyan}%2b  %-60s${echo_reset_color}\n" "✔" "$@"; }
+function e_error() { printf "${echo_red}%2b  %-60s${echo_reset_color}\n" "🧨" "$@"; }
+function e_arrow() { printf "${echo_yellow}%6b  ${echo_cyan}%-60s${echo_reset_color}\n" "➜" "$@"; }
+function e_info() { printf "${echo_green}%6b  %-60s${echo_reset_color}\n" "∴" "$@"; }
+function e_data() { printf "${echo_green}%6b  %-60s${echo_reset_color}\n" "➜" "$@"; }
+function e_line() { printf "${echo_yellow}%6b  %-60s${echo_reset_color}\n" "\U262F" "$@"; }
+function e_sep() { printf "${echo_yellow}%6b  %60s${echo_reset_color}\n" "\U1F4CD" "--------------------------------------------------------"; }
+function e_question() { printf "${echo_purple}%6b  %-60s${echo_reset_color}\n" "\U00002049" "$@"; }
 
 # bash helpers
 function is_file() {
