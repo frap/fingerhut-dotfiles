@@ -38,7 +38,7 @@ function require_binary {
 trap ctrl_c INT
 
 function ctrl_c() {
-  e_error "Trapped CTRL-C - exiting"
+  e_excep "Trapped CTRL-C - exiting"
 }
 
 prepend_to_path_if_exists () {
