@@ -120,6 +120,9 @@ function has_systemd() {
 	exists /etc/systemd || return 1
 }
 
+# Oracle DB shit
+XE18pattern='18c'
+
 function has_oracledb() {
 	exists /etc/profile.d/oracle_env.sh || return 1
 }
