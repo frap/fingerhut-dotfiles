@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+#set -euo pipefail
 
 # Load colours and helpers first so they can be used in base theme
 source "${DOTFILES}/themes/colours.theme.bash"
