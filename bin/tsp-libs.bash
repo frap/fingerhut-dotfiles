@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Load colours and helpers first so they can be used in base theme
+source "${DOTFILES}/themes/colours.theme.bash"
+
 function e_header() { printf "\n%2b${echo_purple}  %-70s${echo_reset_color}\n" "\U0001F916" "$@"; }
 function e_install() { printf "%6b${echo_purple}  %-60s${echo_reset_color}\n" "🏗 " "$@"; }
 function e_success() { printf "%b${echo_cyan}  %s${echo_reset_color}\n" "✔" "$@"; }

@@ -32,9 +32,6 @@ __dir="$(cd -P "$(dirname "$SOURCE")" && pwd)"
 # Where the magic happens.
 export DOTFILES=~/.local/dotfiles
 
-# Load colours and helpers first so they can be used in base theme
-source "${DOTFILES}/themes/colours.theme.bash"
-
 # source TSP bash libs, errors colours etc
 source "${DOTFILES}/bin/tsp-libs.bash"
 
