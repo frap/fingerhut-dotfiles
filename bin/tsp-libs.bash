@@ -1,20 +1,20 @@
-#!/usr/bin/env bash
+bs#!/usr/bin/env bash
 #set -euo pipefail
 
 # Load colours and helpers first so they can be used in base theme
 source "${DOTFILES}/themes/colours.theme.bash"
 
-function e_header() { printf "\n%2b${echo_purple}  %-70s${echo_reset_color}\n" "\U0001F916" "$@"; }
-function e_install() { printf "%6b${echo_purple}  %-60s${echo_reset_color}\n" "🏗 " "$@"; }
+function e_header() { printf "\n%4b${echo_purple}  %-70s${echo_reset_color}\n" "\U0001F916" "$@"; }
+function e_install() { printf "%4b${echo_purple}  %-60s${echo_reset_color}\n" "🏗 " "$@"; }
 function e_success() { printf "%b${echo_cyan}  %s${echo_reset_color}\n" "✔" "$@"; }
 function e_error() { printf "%b${echo_red} %s${echo_reset_color}\n" "❌" "$@"; }
-function e_excep() { printf "\n%2b${echo_red}  %-60s${echo_reset_color}\n" "🧨" "$@"; }
-function e_arrow() { printf "${echo_yellow}%6b  ${echo_cyan}%-60s${echo_reset_color}\n" "➜" "$@"; }
-function e_info() { printf "${echo_green}%6b  %-60s${echo_reset_color}\n" "∴" "$@"; }
-function e_data() { printf "${echo_green}%6b  %-60s${echo_reset_color}\n" "➜" "$@"; }
-function e_line() { printf "${echo_yellow}%6b  %-60s${echo_reset_color}\n" "\U262F" "$@"; }
-function e_sep() { printf "${echo_yellow}%6b  %60s${echo_reset_color}\n" "\U1F4CD" "--------------------------------------------------------"; }
-function e_question() { printf "${echo_purple}%6b  %-60s${echo_reset_color}\n" "\U00002049" "$@"; }
+function e_excep() { printf "\n%4b${echo_red}  %-60s${echo_reset_color}\n" "🧨" "$@"; }
+function e_arrow() { printf "${echo_yellow}%4b  ${echo_cyan}%-60s${echo_reset_color}\n" "➜" "$@"; }
+function e_info() { printf "${echo_green}%4b  %-60s${echo_reset_color}\n" "∴" "$@"; }
+function e_data() { printf "${echo_green}%4b  %-60s${echo_reset_color}\n" "➜" "$@"; }
+function e_line() { printf "${echo_yellow}%4b  %-60s${echo_reset_color}\n" "\U262F" "$@"; }
+function e_sep() { printf "${echo_yellow}%4b  %-60s${echo_reset_color}\n" "\U1F4CD" "--------------------------------------------------------"; }
+function e_question() { printf "${echo_purple}%4b  %-60s${echo_reset_color}\n" "\U00002049" "$@"; }
 
 # bash helpers
 function is_file() {
