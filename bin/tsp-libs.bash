@@ -6,7 +6,8 @@ source "${DOTFILES}/themes/colours.theme.bash"
 
 function e_header() { printf "\n%4b${echo_purple}  %-70s${echo_reset_color}\n" "\U0001F916" "$@"; }
 function e_install() { printf "%4b${echo_purple}  %-60s${echo_reset_color}\n" "🏗 " "$@"; }
-function e_success() { printf "%b${echo_cyan}  %s${echo_reset_color}\n" "✔" "$@"; }
+function e_success() { echo -e "${echo_cyan}✔ $@${echo_reset_color}"; }
+function e_error() { echo -e "${echo_red}❌  $@ ${echo_reset_color}"; }
 function e_error() { printf "%b${echo_red} %s${echo_reset_color}\n" "❌" "$@"; }
 function e_excep() { printf "\n%4b${echo_red}  %-60s${echo_reset_color}\n" "🧨" "$@"; }
 function e_arrow() { printf "${echo_yellow}%4b  ${echo_cyan}%-60s${echo_reset_color}\n" "➜" "$@"; }
