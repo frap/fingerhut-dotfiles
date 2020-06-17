@@ -17,6 +17,18 @@ function e_sep() { printf "${echo_yellow}%4b  %-60s${echo_reset_color}\n" "\U1F4
 function e_question() { printf "${echo_purple}%4b  %-60s${echo_reset_color}\n" "\U00002049" "$@"; }
 
 # bash helpers
+is_empty() {
+	local var=$1
+
+	[[ -z $var ]]
+}
+
+is_not_empty() {
+	local var=$1
+
+	[[ -n $var ]]
+}
+
 function is_file() {
 	local file=$1
 
@@ -33,6 +45,12 @@ function is_dir() {
 	local dir=$1
 
 	[[ -d $dir ]]
+}
+
+is_not_dir() {
+	local dir=$1
+
+	[[ ! -d $dir ]]
 }
 
 function is_link() {
