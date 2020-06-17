@@ -1,4 +1,4 @@
-bs#!/usr/bin/env bash
+#!/usr/bin/env bash
 #set -euo pipefail
 
 # Load colours and helpers first so they can be used in base theme
