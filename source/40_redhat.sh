@@ -2,17 +2,16 @@
 is_redhat || return 1
 
 # Package management
-if [ $redhat_version -ge 8 ]
-then
-   alias update="sudo dnf update"
-   alias install="sudo dnf install"
-   alias remove="sudo dnf remove"
-   alias search="sudo dnf search"
+if [ $redhat_version -ge 8 ]; then
+	alias update="sudo dnf update"
+	alias install="sudo dnf install"
+	alias remove="sudo dnf remove"
+	alias search="sudo dnf search"
 else
-    alias update="sudo yum update"
-    alias install="sudo yum install"
-    alias remove="sudo yum remove"
-    alias search="sudo rpm -qa | rg "
+	alias update="sudo yum update"
+	alias install="sudo yum install"
+	alias remove="sudo yum remove"
+	alias search="sudo rpm -qa | rg "
 fi
 alias say=spd-say
 

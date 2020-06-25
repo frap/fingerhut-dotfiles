@@ -127,6 +127,11 @@ function has_rg() {
 	hash rg 2>/dev/null || return 1
 }
 
+# rust version of find
+function has_fd() {
+	hash fd 2>/dev/null || return 1
+}
+
 function has_clojure() {
 	hash clojure 2>/dev/null || return 1
 }

@@ -10,13 +10,17 @@ export LESS='-iX -R -P--Less--?f %f .?x%t (next is %x) .?e(END\: hit q to quit):
 # I'm used to tcsh 'where' to learn the info that bash 'type -a' prints
 alias where='type -a'
 
-alias ldd='otool -L'
+if has_fd; then
+    alias find=fd
+    # find ignoring .gitignore
+    alias fda='fd -IH'
+fi
 
 # fwf - find writable files
-alias fwf='find . \! -type d -a -perm -200 -ls'
+alias fwf='\find . \! -type d -a -perm -200 -ls'
 
 # fnd - find non-directory files
-alias fnd='find . \! -type d'
+alias fnd='\find . \! -type d'
 
 #  make mv, cp ask before over writing, and rm ask before removing
 alias mv='mv -i'

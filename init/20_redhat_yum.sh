@@ -5,9 +5,10 @@ is_redhat || return 1
 e_header "Updating VM packages"
 # make sure we use dnf on EL 8+
 if [ $redhat_version -ge 8 ]; then
-  sudo dnf -y update
+    sudo dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    sudo dnf -y update
 else
-  sudo yum -y update
+    sudo yum -y update
 fi
 
 # install ripgrep
@@ -21,21 +22,24 @@ fi
 # Install YUM packages.
 packages=(
 #  ansible
-  binutils
-  cargo
-  curl
-  emacs-nox
-  java-1.8.0-openjdk-headless
-  lsof
-  nmap
-  nmap-ncat
-  python3
-  python3-pip
-  rust
-  socat
-  tree
-  tcpdump
-  vim
+    binutils
+    bind-utils
+    cargo
+    curl
+    emacs-nox
+    inotify-tools
+    java-1.8.0-openjdk-headless
+    lsof
+    nmap
+    nmap-ncat
+    python3
+    python3-pip
+    rlwrap
+    rust
+    socat
+    tree
+    tcpdump
+    vim
 )
 
 if (( ${#packages[@]} > 0 )) && [ $redhat_version -ge 8 ];
@@ -51,9 +55,9 @@ else
   done
 fi
 
-e_info "Linking python3 to python and pip"
-sudo ln -s /usr/bin/python3 /usr/local/bin/python
-sudo ln -s /usr/bin/pip3.6 /usr/local/bin/pip
+#e_info "Linking python3 to python and pip"
+#sudo ln -s /usr/bin/python3 /usr/local/bin/python
+#sudo ln -s /usr/bin/pip3.6 /usr/local/bin/pip
 
 function install_app() {
   local app=$1
