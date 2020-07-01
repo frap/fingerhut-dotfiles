@@ -55,9 +55,9 @@ else
   done
 fi
 
-#e_info "Linking python3 to python and pip"
-#sudo ln -s /usr/bin/python3 /usr/local/bin/python
-#sudo ln -s /usr/bin/pip3.6 /usr/local/bin/pip
+e_info "Linking python3 as default python"
+sudo alternatives --set python /usr/bin/python3
+
 
 function install_app() {
   local app=$1
