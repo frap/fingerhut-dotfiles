@@ -11,10 +11,10 @@ function e_error() { echo -e "${echo_red}❌  $@ ${echo_reset_color}"; }
 function e_error() { printf "%b${echo_red} %s${echo_reset_color}\n" "❌" "$@"; }
 function e_excep() { printf "\n%4b${echo_red}  %-60s${echo_reset_color}\n" "🧨" "$@"; }
 function e_arrow() { printf "${echo_yellow}%4b  ${echo_cyan}%-60s${echo_reset_color}\n" "➜" "$@"; }
-function e_info() { printf "${echo_green}%4b  %-60s${echo_reset_color}\n" "∴" "$@"; }
+function e_info() { printf "${echo_yellow}%4b  %-60s${echo_reset_color}\n" "∴" "$@"; }
 function e_data() { printf "${echo_green}%4b  %-60s${echo_reset_color}\n" "➜" "$@"; }
 function e_line() { printf "${echo_yellow}%4b  %-60s${echo_reset_color}\n" "\U262F" "$@"; }
-function e_sep() { printf "${echo_yellow}%4b  %-60s${echo_reset_color}\n" "\U1F4CD" "--------------------------------------------------------"; }
+function e_sep() { printf "${echo_cyan}%4b  %-60s${echo_reset_color}\n" "\U1F4CD" "--------------------------------------------------------"; }
 function e_question() { printf "${echo_purple}%4b  %-60s${echo_reset_color}\n" "\U00002049" "$@"; }
 
 # bash helpers
