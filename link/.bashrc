@@ -2,12 +2,27 @@
 export DOTFILES=~/.local/dotfiles
 
 # Add binaries into the path
-BASH_IT_THEME="powerline-multiline"
+
 PATH=$DOTFILES/bin:$PATH
-export THEME_CLOCK_FORMAT="%H:%M"
-export POWERLINE_LEFT_PROMPT="scm cwd"
-export POWERLINE_RIGHT_PROMPT="clock battery shlvl user_info hostname"
-export PATH BASH_IT_THEME
+export PATH
+
+#load up the bash_prompt - do it here as emacs tramp gets fucked up with
+# non > prompts
+case "$TERM" in
+          "dumb")
+            export PS1="> "
+            ;;
+          xterm*|rxvt*|eterm*|screen*)
+            BASH_IT_THEME="powerline-multiline"
+            export THEME_CLOCK_FORMAT="%H:%M"
+            export POWERLINE_LEFT_PROMPT="scm cwd"
+            export POWERLINE_RIGHT_PROMPT="clock battery shlvl user_info hostname"
+            export BASH_IT_THEME
+            ;;
+            *)
+              PS1="> "
+            ;;
+esac
 
 # Source all files in "source"
 function src() {
@@ -19,16 +34,6 @@ function src() {
           source "$file"
       done
   fi
-  #load up the bash_prompt - do it here as emacs tramp gets fucked up with
-  #non > prompts
-  case "$TERM" in
-        "dumb")
-            export PS1="> "
-            ;;
-        xterm*|rxvt*|eterm*|screen*)
- #           tty -s && source ~/.bash_prompt
-            ;;
-  esac
 }
 
 # Run dotfiles script, then source.
