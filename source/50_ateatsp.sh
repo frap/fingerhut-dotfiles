@@ -1,8 +1,7 @@
 # Atea TSP stuff
 is_ateatsp || return 1
-
 function has_ccze() {
-	hash ccze 2>/dev/null || return 1
+  hash ccze 2>/dev/null || return 1
 }
 
 if has_tomcat && has_ccze
@@ -27,5 +26,9 @@ then
 fi
 
 #NVM settings
+if is_dir "/atea/home/atearoot"; then
 export NVM_DIR="/atea/home/atearoot/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
+
+exists "/etc/atea/properties/tnsnames.ora" && EXPORT TNS_ADMIN="/etc/atea/properties/tnsnames.ora"

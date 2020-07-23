@@ -1,9 +1,15 @@
+
 if has_rg; then
 	alias grep='rg'
 else
 	alias grep='grep --color=auto'
 	alias fgrep='fgrep --color=auto'
 	alias egrep='egrep --color=auto'
+fi
+
+if has_sqlcl
+then
+   prepend_to_path_if_exists "/opt/sqlcl/bin"
 fi
 
 if has_gpg_agent; then

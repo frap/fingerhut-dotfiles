@@ -2,9 +2,4 @@
 has_oracledb || return 1
 
 # OracleDB exists hence lets set Oracle env
-source "/etc/profile.d/oracle_env.sh"
-
-if has_sqlcl
-then
-   prepend_to_path_if_exists "/opt/sqlcl/bin"
-fi
+exists "/etc/profile.d/oracle_env.sh" && source "/etc/profile.d/oracle_env.sh"

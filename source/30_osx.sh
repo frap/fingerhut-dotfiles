@@ -61,6 +61,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh" # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
 
+# create a new password and paste to clipboard
+function pwcopy {
+  < /dev/urandom \
+    LANG= \
+    tr -dc a-zA-Z0-9 \
+    | head -c ${1:-16} \
+    | pbcopy \
+    && pbpaste \
+    && echo
+  }
 # Create a new Parallels VM from template, replacing the existing one.
 function vm_template() {
   local name="$@"
