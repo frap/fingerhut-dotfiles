@@ -31,4 +31,4 @@ export NVM_DIR="/atea/home/atearoot/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 fi
 
-exists "/etc/atea/properties/tnsnames.ora" && EXPORT TNS_ADMIN="/etc/atea/properties/tnsnames.ora"
+exists "/etc/atea/properties/tnsnames.ora" && export TNS_ADMIN="/etc/atea/properties/tnsnames.ora"
