@@ -19,77 +19,77 @@ function e_question() { printf "${echo_purple}%4b  %-60s${echo_reset_color}\n" "
 
 # bash helpers
 is_empty() {
-	local var=$1
+    local var=$1
 
-	[[ -z $var ]]
+    [[ -z $var ]]
 }
 
 is_not_empty() {
-	local var=$1
+    local var=$1
 
-	[[ -n $var ]]
+    [[ -n $var ]]
 }
 
 function is_file() {
-	local file=$1
+    local file=$1
 
-	[[ -f $file ]]
+    [[ -f $file ]]
 }
 
 function exists() {
-	local file=$1
+    local file=$1
 
-	test -e $1
+    test -e $1
 }
 
 function is_dir() {
-	local dir=$1
+    local dir=$1
 
-	[[ -d $dir ]]
+    [[ -d $dir ]]
 }
 
 is_not_dir() {
-	local dir=$1
+    local dir=$1
 
-	[[ ! -d $dir ]]
+    [[ ! -d $dir ]]
 }
 
 function is_link() {
-	local dir=$1
+    local dir=$1
 
-	[[ -L $dir ]]
+    [[ -L $dir ]]
 }
 
 function matches_regex() {
-	local filepath=$1
-	local regex=$2
+    local filepath=$1
+    local regex=$2
 
-	[[ $filepath =~ $regex ]]
+    [[ $filepath =~ $regex ]]
 }
 
 # OS detection
 function is_osx() {
-	[[ "$OSTYPE" =~ ^darwin ]] 2>/dev/null || return 1
+    [[ "$OSTYPE" =~ ^darwin ]] 2>/dev/null || return 1
 }
 function is_ubuntu() {
-	[[ "$(cat /etc/issue 2>/dev/null)" =~ Ubuntu ]] || return 1
+    [[ "$(cat /etc/issue 2>/dev/null)" =~ Ubuntu ]] || return 1
 }
 function is_ubuntu_desktop() {
-	dpkg -l ubuntu-desktop >/dev/null 2>&1 || return 1
+    dpkg -l ubuntu-desktop >/dev/null 2>&1 || return 1
 }
 function is_redhat() {
-	[[ "$(cat /etc/redhat-release 2>/dev/null)" =~ "Red Hat" ]] || return 1
+    [[ "$(cat /etc/redhat-release 2>/dev/null)" =~ "Red Hat" ]] || return 1
 }
 function is_oraclelinux() {
-	[[ "$(cat /etc/oracle-release 2>/dev/null)" =~ "Oracle Linux" ]] || return 1
+    [[ "$(cat /etc/oracle-release 2>/dev/null)" =~ "Oracle Linux" ]] || return 1
 }
 
 function is_ateatsp() {
-	exists "/atea/home/atearoot" || return 1
+    exists "/home/atearoot" || return 1
 }
 
 function is_custtsp() {
-	exists "/atea/home/thirdparty" || return 1
+    exists "/atea/home/thirdparty" || return 1
 }
 
 if exists /etc/redhat-release; then
