@@ -62,10 +62,10 @@ packages=(
 #  cmatrix
   cowsay
   curl
-  docker.io
-  docker-compose
+  docker-ce
   fd-find
   git-core
+  golang
 #  imagemagick
   jq
   nmap

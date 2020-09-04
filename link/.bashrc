@@ -13,11 +13,9 @@ case "$TERM" in
             export PS1="> "
             ;;
           xterm*|rxvt*|eterm*|screen*)
-            BASH_IT_THEME="powerline"
-            #export THEME_CLOCK_FORMAT="%H:%M"
-            #export POWERLINE_LEFT_PROMPT="scm cwd"
-            #export POWERLINE_RIGHT_PROMPT="clock battery shlvl user_info hostname"
-            export BASH_IT_THEME
+            if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+               PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+            fi
             ;;
             *)
               PS1="> "

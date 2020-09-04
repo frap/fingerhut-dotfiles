@@ -27,6 +27,7 @@ packages=(
     cargo
     curl
     emacs-nox
+    golang
     inotify-tools
     java-1.8.0-openjdk-headless
     lsof

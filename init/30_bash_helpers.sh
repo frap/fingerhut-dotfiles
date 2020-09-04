@@ -15,3 +15,6 @@ if ! has_exa; then
 	sudo ln -s /usr/local/bin/exa-linux-x86_64 /usr/local/bin/exa
 	rm -f exa-linux*
 fi
+
+# install powerline go
+go get -u github.com/justjanne/powerline-go

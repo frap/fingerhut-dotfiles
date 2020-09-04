@@ -1,34 +1,14 @@
 #!/usr/bin/env bash
 
-export BASH_IT=$DOTFILES
-
-# Don't check mail when opening terminal.
-unset MAILCHECK
-
-# Set this to false to turn off version control status checking within the prompt for all themes
-#export SCM_CHECK=true
+export GOPATH=~/go
 
 function _command_exists() {
 	type "$1" &>/dev/null
 }
 
-# Load theme, if a theme was set
-if [[ ! -z "${BASH_IT_THEME}" ]]; then
-	# shellcheck source=./themes/githelpers.theme.bash
-	source "${DOTFILES}/themes/githelpers.theme.bash"
-	# shellcheck source=./themes/p4helpers.theme.bash
-	source "${DOTFILES}/themes/p4helpers.theme.bash"
-	# shellcheck source=./themes/base.theme.bash
-	source "${DOTFILES}/themes/base.theme.bash"
+# coloured ls
+#	export LSCOLORS='Gxfxcxdxdxegedabagacad'
 
-	# coloured ls
-	export LSCOLORS='Gxfxcxdxdxegedabagacad'
-
-	# Load the theme
-	if [[ -f $BASH_IT_THEME ]]; then
-		source $BASH_IT_THEME
-	else
-		source "$DOTFILES/themes/$BASH_IT_THEME/$BASH_IT_THEME.theme.bash"
-	fi
-
-fi
+function _update_ps1() {
+   PS1="$($GOPATH/bin/powerline-go -condensed -cwd-max-depth 3 -alternate-ssh-icon  -hostname-only-if-ssh -colorize-hostname  -error $?)"
+   }
