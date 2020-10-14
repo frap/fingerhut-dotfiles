@@ -1,0 +1,5 @@
+[hostname]
+ssh_only = true
+prefix = "🖥 "
+suffix = ""
+style = "bold blue"
