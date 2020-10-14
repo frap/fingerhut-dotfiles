@@ -39,3 +39,17 @@ function dotfiles() {
 }
 
 src
+
+#NVM settings
+if is_dir "/atea/home/atearoot"; then
+  export NVM_DIR="/atea/home/atearoot/.nvm"
+else
+  export NVM_DIR="$HOME/.nvm"
+fi
+if is_osx
+then
+ [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh" # This loads nvm
+ [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
+else
+ [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+fi
