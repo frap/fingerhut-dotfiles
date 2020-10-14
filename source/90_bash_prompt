@@ -9,6 +9,6 @@ function _command_exists() {
 # coloured ls
 #	export LSCOLORS='Gxfxcxdxdxegedabagacad'
 
-function _update_ps1() {
-   PS1="$($GOPATH/bin/powerline-go -condensed -cwd-max-depth 3 -alternate-ssh-icon  -hostname-only-if-ssh -colorize-hostname  -error $?)"
-   }
+#function _update_ps1() {
+##  PS1="$($GOPATH/bin/powerline-go -condensed -cwd-max-depth 3 -alternate-ssh-icon  -hostname-only-if-ssh -colorize-hostname  -error $?)"
+#  }
