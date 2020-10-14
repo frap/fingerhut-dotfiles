@@ -73,12 +73,16 @@ function install_app() {
   popd
 }
 
+if ! has_fd
+then
 
-e_install "Installing fd - a better find"
-install_app "fd" "https://github.com/sharkdp/fd/releases/download/v8.1.0/fd-v8.1.0-x86_64-unknown-linux-gnu.tar.gz"
+  e_install "Installing fd - a better find"
+  install_app "fd" "https://github.com/sharkdp/fd/releases/download/v8.1.0/fd-v8.1.0-x86_64-unknown-linux-gnu.tar.gz"
 
-e_install "Installing bat - a better cat"
-install_app "bat" "https://github.com/sharkdp/bat/releases/download/v0.15.1/bat-v0.15.1-x86_64-unknown-linux-gnu.tar.gz"
+  e_install "Installing bat - a better cat"
+  install_app "bat" "https://github.com/sharkdp/bat/releases/download/v0.15.1/bat-v0.15.1-x86_64-unknown-linux-gnu.tar.gz"
 
-# procs replacement for htop
-sudo rpm -i https://github.com/dalance/procs/releases/download/v0.10.3/procs-0.10.3-1.x86_64.rpm
+  # procs replacement for htop
+  sudo rpm -i https://github.com/dalance/procs/releases/download/v0.10.3/procs-0.10.3-1.x86_64.rpm
+
+fi
