@@ -22,7 +22,7 @@ function pingtest() {
   ping ${1:-8.8.8.8} | perl -pe '/bytes from/ && `'$c' ping`'
 }
 
-if which govc  >/dev/null 2>&1
+if has_govc
 then
     export GOVC_URL=https://administrator@vsphere.local:${VCENTER_PASS}@vcenter.atea.dev
     export GOVC_TLS_KNOWN_HOSTS=~/.govc_known_hosts
