@@ -192,6 +192,10 @@ if has_docker; then
 	alias dsp='docker stack ps'
 fi
 
+if has_microk8s; then
+  alias kc="microk8s kubectl"
+fi
+
 if has_clojure; then
    alias repl='clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"}}}" -m rebel-readline.main'
 fi
@@ -217,20 +221,20 @@ alias topm="ps -e -o pmem,pid,user,tty,args | sort -n -k 1 -r | head"
 # Note, these do the same thing:
 #   loop 5 bash -c 'echo foo; echo bar;
 #   loopc 5 'echo foo; echo bar'
-function loopc() { loop "$@"; }
-function loop() {
-  local caller=$(caller 0 | awk '{print $2}')
-  local delay=1
-  if [[ $1 =~ ^[0-9]*(\.[0-9]+)?$ ]]; then
-    delay=$1
-    shift
-  fi
-  while true; do
-    if [[ "$caller" == "loopc" ]]; then
-      bash -c "$@"
-    else
-      "$@"
-    fi
-    sleep $delay
-  done
-}
+# function loopc() { loop "$@"; }
+# function loop() {
+#   local caller=$(caller 0 | awk '{print $2}')
+#   local delay=1
+#   if [[ $1 =~ ^[0-9]*(\.[0-9]+)?$ ]]; then
+#     delay=$1
+#     shift
+#   fi
+#   while true; do
+#     if [[ "$caller" == "loopc" ]]; then
+#       bash -c "$@"
+#     else
+#       "$@"
+#     fi
+#     sleep $delay
+#   done
+# }
