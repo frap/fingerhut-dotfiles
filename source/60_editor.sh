@@ -20,6 +20,12 @@ function ec() {
   fi
 }
 
+em() {
+  CFLAG=""
+  [[ -z "$@" ]] && CFLAG="--create-frame"
+  emacsclient $CFLAG --alternate-editor=emacs --no-wait "$@"
+}
+
 if is_ateatsp
 then
     export EDITOR="vim"
